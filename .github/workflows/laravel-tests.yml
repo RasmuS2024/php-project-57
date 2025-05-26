@@ -20,5 +20,13 @@ jobs:
           extensions: mbstring, phpstan
           coverage: none
 
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          composer-options: --no-interaction 
+
       - name: Run PHPStan
         run: composer phpstan
+
+      - name: Run PHP_CodeSniffer
+        run: composer phpcs
