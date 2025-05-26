@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
 
       #- name: Run PHPStan
       #  run: composer phpstan
@@ -22,12 +22,12 @@ jobs:
       #- name: Generate coverage report
       #  run: php artisan test --coverage-clover=reports/coverage.xml
 
-      - name: Run SonarQube/SonarCloud analysis
-        uses: sonarsource/sonarqube-scan-action@v4
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #- name: Run SonarQube/SonarCloud analysis
+       # uses: sonarsource/sonarqube-scan-action@v4
+       # env:
+       #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           # SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  
           # Только для SonarQube
-        with:
-          args: >
-            -Dsonar.php.coverage.reportPaths=reports/coverage.xml
+       # with:
+       #   args: >
+       #     -Dsonar.php.coverage.reportPaths=reports/coverage.xml
