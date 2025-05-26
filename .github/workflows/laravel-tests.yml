@@ -13,20 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      #- name: Run PHPStan
+      #  run: composer phpstan
+
+      #- name: Run PHP_CodeSniffer
+      #  run: composer phpcs
+
+      - name: Generate coverage report
+        run: php artisan test --coverage-clover=reports/coverage.xml
+
+      - name: Run SonarQube/SonarCloud analysis
+        uses: sonarsource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  
+          # Только для SonarQube
         with:
-          php-version: 8.2
-          extensions: mbstring, phpstan
-          coverage: none
-
-      - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
-        with:
-          composer-options: --no-interaction 
-
-      - name: Run PHPStan
-        run: composer phpstan
-
-      - name: Run PHP_CodeSniffer
-        run: composer phpcs
+          args: >
+            -Dsonar.php.coverage.reportPaths=reports/coverage.xml

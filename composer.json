@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "hexlet/code",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Task manager on Laravel framework.",
+    "keywords": ["laravel", "framework", "task", "manager"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -17,7 +17,7 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "nunomaduro/larastan": "^3.4",
+        "larastan/larastan": "^3.4",
         "phpcsstandards/phpcsdevtools": "^1.0",
         "phpcsstandards/phpcsextra": "^1.1",
         "phpstan/extension-installer": "^1.4",
