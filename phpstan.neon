@@ -3,6 +3,7 @@ parameters:
   paths:
     - public
     - app
+    - src
   fileExtensions:
     - php
 
