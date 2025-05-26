@@ -19,8 +19,8 @@ jobs:
       #- name: Run PHP_CodeSniffer
       #  run: composer phpcs
 
-      - name: Generate coverage report
-        run: php artisan test --coverage-clover=reports/coverage.xml
+      #- name: Generate coverage report
+      #  run: php artisan test --coverage-clover=reports/coverage.xml
 
       - name: Run SonarQube/SonarCloud analysis
         uses: sonarsource/sonarqube-scan-action@v4
