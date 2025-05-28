@@ -6,8 +6,6 @@
     "keywords": ["laravel", "framework", "task", "manager"],
     "license": "MIT",
     "require": {
-        "ext-pdo": "*",
-        "ext-pgsql": "*",
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1"
