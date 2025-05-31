@@ -1,0 +1,33 @@
+name: Laravel Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
+
+      #- name: Run PHPStan
+      #  run: composer phpstan
+
+      #- name: Run PHP_CodeSniffer
+      #  run: composer phpcs
+
+      #- name: Generate coverage report
+      #  run: php artisan test --coverage-clover=reports/coverage.xml
+
+      #- name: Run SonarQube/SonarCloud analysis
+       # uses: sonarsource/sonarqube-scan-action@v4
+       # env:
+       #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  
+          # Только для SonarQube
+       # with:
+       #   args: >
+       #     -Dsonar.php.coverage.reportPaths=reports/coverage.xml
