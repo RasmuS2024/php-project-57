@@ -8,19 +8,30 @@
         <title>{{ config('app.name', 'TaskManager') }}</title>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <!--
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">        
+        -->
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+      <div class="container">
+        @include('flash::message') {{-- Основной вывод сообщений --}}
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function() {
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        });
+      </script>
+
       <div id="app">
         <header class="fixed w-full">
             @include('layouts.navigation')
         </header>
             <!-- Page Content -->
-            <main>
                 {{ $slot }}
-            </main>
         </div>
     </body>
 </html>

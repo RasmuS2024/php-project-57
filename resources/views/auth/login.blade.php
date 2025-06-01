@@ -1,27 +1,37 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    
     <h2 class="text-center"><a href="/">Менеджер задач</a></h2>
+
+    @if($errors->any())
+        <div class="mb-4">
+            <div class="font-medium text-red-600">
+                Упс! Что-то пошло не так:
+            </div>
+            <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <!-- Email Address -->
         <div>
             <x-input-label class="block font-medium text-sm text-gray-700" for="email" :value="__('Email')" />
             <x-text-input id="email" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus/>
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
             <x-input-label class="block font-medium text-sm text-gray-700" for="password" :value="__('Пароль')" />
-
             <x-text-input id="password" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
