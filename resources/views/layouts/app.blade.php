@@ -8,11 +8,6 @@
         <title>{{ config('app.name', 'TaskManager') }}</title>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-        <!--
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">        
-        -->
-
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
@@ -30,8 +25,7 @@
         <header class="fixed w-full">
             @include('layouts.navigation')
         </header>
-            <!-- Page Content -->
-                {{ $slot }}
+            @yield('content')
         </div>
     </body>
 </html>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use App\Models\TaskStatus;
+use Illuminate\Validation\Rule;
 
 class TaskStatusController extends Controller
 {
@@ -14,7 +16,8 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        //
+        $taskStatuses = TaskStatus::paginate(15);
+        return view('taskStatus.index', compact('taskStatuses'));
     }
 
     /**
@@ -24,7 +27,7 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('taskStatus.create');
     }
 
     /**
@@ -33,31 +36,38 @@ class TaskStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskStatus $taskStatus)
+    public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|unique:task_statuses|max:255'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TaskStatus $taskStatus)
-    {
-        //
+        TaskStatus::create($request->all());
+        
+        return redirect()->route('task_statuses.index')
+            ->with('success', 'Статус успешно создан');
     }
 
     public function edit(TaskStatus $taskStatus)
     {
-        //
+        return view('taskStatus.edit', compact('taskStatus'));
     }
 
 
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        //
+        $request->validate([
+            'name' => [
+                'required',
+                'max:255',
+                Rule::unique('task_statuses')->ignore($taskStatus->id)
+            ]
+        ]);
+
+        $taskStatus->update($request->all());
+        
+        return redirect()->route('task_statuses.index')
+            ->with('success', 'Статус успешно обновлён');
     }
 
     public function destroy(TaskStatus $taskStatus)
