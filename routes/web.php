@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('tasks', LabelController::class);
 
-Route::resource('task_statuses', TaskStatusController::class);
+Route::resource('task_statuses', TaskStatusController::class)->except(['show']);
 
 Route::resource('labels', LabelController::class);
 

@@ -8,8 +8,8 @@
       <h1 class="mb-5">Статусы</h1>
         @auth
             <div>
-                <a href="/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Создать метку
+                <a href="{{ route('task_statuses.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Создать статус
                 </a>
             </div>
         @endauth
@@ -33,20 +33,25 @@
                         <td>{{ $status->created_at->format('d.m.Y') }}</td>
                         @auth
                             <td>
-                                <a
-                                    data-confirm="Вы уверены?"
-                                    data-method="delete"
-                                    class="text-red-600 hover:text-red-900"
-                                    href="{{ route('TaskStatus.destroy', $status) }}"
-                                >
-                                    Удалить
-                                </a>
-                                <a 
-                                    class="text-blue-600 hover:text-blue-900 ml-2"
-                                    href="{{ route('TaskStatus.edit', $status) }}"
-                                >
-                                    Изменить
-                                </a>
+  <div class="flex items-center"> <!-- Добавлен flex-контейнер -->
+                                            <a 
+                                                class="text-blue-600 hover:text-blue-900"
+                                                href="{{ route('task_statuses.edit', $status) }}"
+                                            >
+                                                Изменить
+                                            </a>
+                                            <form method="POST" action="{{ route('task_statuses.destroy', $status) }}" class="ml-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button 
+                                                    type="submit" 
+                                                    class="text-red-600 hover:text-red-900"
+                                                    onclick="return confirm('Вы уверены?')"
+                                                >
+                                                    Удалить
+                                                </button>
+                                            </form>
+                                        </div>
                             </td>
                         @endauth
                     </tr>
