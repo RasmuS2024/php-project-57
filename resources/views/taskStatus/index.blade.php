@@ -33,7 +33,7 @@
                         <td>{{ $status->created_at->format('d.m.Y') }}</td>
                         @auth
                             <td>
-  <div class="flex items-center"> <!-- Добавлен flex-контейнер -->
+                             <div class="flex items-center"> 
                                             <a 
                                                 class="text-blue-600 hover:text-blue-900"
                                                 href="{{ route('task_statuses.edit', $status) }}"

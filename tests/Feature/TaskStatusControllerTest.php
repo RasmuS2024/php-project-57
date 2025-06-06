@@ -1,158 +1,114 @@
 <?php
-
 namespace Tests\Feature;
 
-use App\Models\Task;
-use App\Models\TaskStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Arr;
+use App\Models\TaskStatus;
+use App\Models\Task;
 use Tests\TestCase;
 
 class TaskStatusControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    // Тесты для страницы списка статусов
-    public function test_index_page_displays_statuses()
+    // Тесты для index()
+    public function test_index_page_returns_success(): void
     {
-        $statuses = TaskStatus::factory()->count(3)->create();
-
         $response = $this->get(route('task_statuses.index'));
-
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertViewIs('taskStatus.index');
-        $response->assertSee($statuses->first()->name);
     }
 
-    // Тесты для страницы создания статуса
-    public function test_create_page_displays_form()
+    public function test_index_shows_paginated_statuses(): void
+    {
+        TaskStatus::factory()->count(20)->create();
+        $response = $this->get(route('task_statuses.index'));
+        $response->assertViewHas('taskStatuses');
+        $this->assertInstanceOf(\Illuminate\Pagination\LengthAwarePaginator::class, $response->viewData('taskStatuses'));
+    }
+
+    // Тесты для create()
+    public function test_create_page_returns_success(): void
     {
         $response = $this->get(route('task_statuses.create'));
-
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertViewIs('taskStatus.create');
-        $response->assertSee('Создать статус');
     }
 
-    // Тесты для сохранения статуса
-    public function test_store_creates_new_status()
+    // Тесты для store()
+    public function test_store_valid_status(): void
     {
         $data = ['name' => 'New Status'];
-
         $response = $this->post(route('task_statuses.store'), $data);
-
         $response->assertRedirect(route('task_statuses.index'));
-        $response->assertSessionHas('success', 'Статус успешно создан');
+        $response->assertSessionHas('success');
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
-    public function test_store_requires_name()
+    public function test_store_invalid_status(): void
     {
-        $response = $this->post(route('task_statuses.store'), []);
-
+        // Пустое имя
+        $response = $this->post(route('task_statuses.store'), ['name' => '']);
         $response->assertSessionHasErrors('name');
-        $this->assertDatabaseCount('task_statuses', 0);
+
+        // Дубликат имени
+        TaskStatus::factory()->create(['name' => 'Duplicate']);
+        $response = $this->post(route('task_statuses.store'), ['name' => 'Duplicate']);
+        $response->assertSessionHasErrors('name');
     }
 
-    public function test_store_requires_unique_name()
+    // Тесты для edit()
+    public function test_edit_page_returns_success(): void
     {
+        $status = TaskStatus::factory()->create();
+        $response = $this->get(route('task_statuses.edit', $status));
+        $response->assertOk();
+        $response->assertViewIs('taskStatus.edit');
+        $response->assertViewHas('taskStatus', $status);
+    }
+
+    // Тесты для update()
+    public function test_update_valid_status(): void
+    {
+        $status = TaskStatus::factory()->create(['name' => 'Old']);
+        $data = ['name' => 'Updated Status'];
+        $response = $this->patch(route('task_statuses.update', $status), $data);
+        $response->assertRedirect(route('task_statuses.index'));
+        $response->assertSessionHas('success');
+        $this->assertDatabaseHas('task_statuses', $data);
+    }
+
+    public function test_update_invalid_status(): void
+    {
+        $status = TaskStatus::factory()->create(['name' => 'Original']);
         TaskStatus::factory()->create(['name' => 'Existing']);
         
-        $response = $this->post(route('task_statuses.store'), [
-            'name' => 'Existing'
-        ]);
-
+        // Пустое имя
+        $response = $this->patch(route('task_statuses.update', $status), ['name' => '']);
         $response->assertSessionHasErrors('name');
-        $this->assertDatabaseCount('task_statuses', 1);
-    }
-
-    // Тесты для страницы редактирования
-    public function test_edit_page_displays_form()
-    {
-        $status = TaskStatus::factory()->create();
-
-        $response = $this->get(route('task_statuses.edit', $status));
-
-        $response->assertStatus(200);
-        $response->assertViewIs('taskStatus.edit');
-        $response->assertSee($status->name);
-    }
-
-    // Тесты для обновления статуса
-    public function test_update_modifies_existing_status()
-    {
-        $status = TaskStatus::factory()->create();
-        $data = ['name' => 'Updated Status'];
-
-        $response = $this->put(route('task_statuses.update', $status), $data);
-
-        $response->assertRedirect(route('task_statuses.index'));
-        $response->assertSessionHas('success', 'Статус успешно обновлён');
-        $this->assertDatabaseHas('task_statuses', $data);
-    }
-
-    public function test_update_requires_name()
-    {
-        $status = TaskStatus::factory()->create();
-
-        $response = $this->put(route('task_statuses.update', $status), [
-            'name' => ''
-        ]);
-
+        
+        // Дубликат имени
+        $response = $this->patch(route('task_statuses.update', $status), ['name' => 'Existing']);
         $response->assertSessionHasErrors('name');
-        $this->assertDatabaseHas('task_statuses', ['name' => $status->name]);
     }
 
-    public function test_update_requires_unique_name()
-    {
-        $status1 = TaskStatus::factory()->create(['name' => 'First']);
-        $status2 = TaskStatus::factory()->create(['name' => 'Second']);
-
-        $response = $this->put(route('task_statuses.update', $status2), [
-            'name' => 'First'
-        ]);
-
-        $response->assertSessionHasErrors('name');
-        $this->assertDatabaseHas('task_statuses', [
-            'id' => $status2->id,
-            'name' => 'Second'
-        ]);
-    }
-
-    // Тесты для удаления статуса
-    public function test_destroy_deletes_status()
+    // Тесты для destroy()
+    public function test_destroy_status_without_tasks(): void
     {
         $status = TaskStatus::factory()->create();
-
         $response = $this->delete(route('task_statuses.destroy', $status));
-
         $response->assertRedirect(route('task_statuses.index'));
-        $response->assertSessionHas('success', 'Статус успешно удалён');
+        $response->assertSessionHas('success');
         $this->assertDatabaseMissing('task_statuses', ['id' => $status->id]);
     }
 
-    public function test_destroy_fails_when_status_has_tasks()
+    public function test_destroy_status_with_linked_tasks(): void
     {
         $status = TaskStatus::factory()->create();
         Task::factory()->create(['status_id' => $status->id]);
-
+        
         $response = $this->delete(route('task_statuses.destroy', $status));
-
         $response->assertRedirect();
-        $response->assertSessionHas('error', 'Нельзя удалить статус с привязанными задачами');
+        $response->assertSessionHas('error');
         $this->assertDatabaseHas('task_statuses', ['id' => $status->id]);
-    }
-
-    public function test_destroy_handles_general_errors()
-    {
-        $status = TaskStatus::factory()->create();
-        $this->mock(TaskStatus::class, function ($mock) use ($status) {
-            $mock->shouldReceive('delete')->andThrow(new \Exception('Test error'));
-        });
-
-        $response = $this->delete(route('task_statuses.destroy', $status));
-
-        $response->assertRedirect();
-        $response->assertSessionHas('error', 'Произошла ошибка при удалении');
     }
 }

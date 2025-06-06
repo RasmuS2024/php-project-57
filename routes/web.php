@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Middleware\AuthenticateWithForbidden;
 
 
 use Illuminate\Support\Str;
@@ -29,11 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/task_statuses/{task_status}', function () {
+})
+->middleware(AuthenticateWithForbidden::class);
+
+
 Route::resource('tasks', LabelController::class);
-
 Route::resource('task_statuses', TaskStatusController::class)->except(['show']);
-
 Route::resource('labels', LabelController::class);
+
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');

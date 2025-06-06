@@ -6,10 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\TaskStatus;
 use Illuminate\Validation\Rule;
+use Illuminate\Routing\Controller;
 
 class TaskStatusController extends Controller
 {
-       /**
+    public function __construct()
+    {
+        $this->middleware('auth.forbidden')->only([
+            'edit', 
+            'update', 
+            'destroy'
+        ]);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
