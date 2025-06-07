@@ -29,14 +29,30 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::get('/task_statuses/{task_status}', function () {
-})
+/*
+Route::get('/task_statuses/create', function () {})
 ->middleware(AuthenticateWithForbidden::class);
-
+*/
+/*
+Route::get('task_statuses/create', [TaskStatusController::class, 'create'])->middleware(AuthenticateWithForbidden::class)
+  ->name('taskStatus.create');
+*/
+/*
+Route::get('/task_statuses/{id}', function () {})
+->middleware('auth.forbidden');
+*/
+/*
+Route::get('/task_statuses/{task_status}/edit', function () {})
+->middleware(AuthenticateWithForbidden::class);
+*/
+/*
+Route::get('/task_statuses/create', function () {})
+->middleware(AuthenticateWithForbidden::class);
+*/
 
 Route::resource('tasks', LabelController::class);
 Route::resource('task_statuses', TaskStatusController::class)->except(['show']);
+Route::get('task_statuses/{id}', [TaskStatusController::class, 'show'])->name('task_statuses.show');
 Route::resource('labels', LabelController::class);
 
 

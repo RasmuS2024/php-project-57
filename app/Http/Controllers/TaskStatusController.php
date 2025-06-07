@@ -15,7 +15,9 @@ class TaskStatusController extends Controller
         $this->middleware('auth.forbidden')->only([
             'edit', 
             'update', 
-            'destroy'
+            'destroy', 
+            'create',
+            'store'
         ]);
     }
     /**
@@ -29,14 +31,20 @@ class TaskStatusController extends Controller
         return view('taskStatus.index', compact('taskStatuses'));
     }
 
+    public function show($id)
+    {
+        abort(403, 'Просмотр статусов запрещён');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        // \Log::debug('Reached TaskStatusController::create');
         return view('taskStatus.create');
+        //return view('taskStatus.create');
     }
 
     /**
