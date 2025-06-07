@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
             $table->string('name');
-            $table->string('author');
-            $table->string('executor');
+            $table->text('description')->nullable();
+            $table->foreignId('status_id')->constrained('task_statuses');
+            $table->foreignId('created_by_id')->constrained('users');
+            $table->foreignId('assigned_to_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

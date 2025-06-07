@@ -15,8 +15,8 @@ class TaskFactory extends Factory
             'name' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'status_id' => \App\Models\TaskStatus::factory(),
-            'author_id' => \App\Models\User::factory(),
-            'executor_id' => \App\Models\User::factory(),
+            'created_by_id' => \App\Models\User::factory(),
+            'assigned_to_id' => \App\Models\User::factory(),
         ];
     }
 }

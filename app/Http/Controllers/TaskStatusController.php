@@ -42,9 +42,7 @@ class TaskStatusController extends Controller
      */
     public function create()
     {   
-        // \Log::debug('Reached TaskStatusController::create');
         return view('taskStatus.create');
-        //return view('taskStatus.create');
     }
 
     /**
@@ -61,8 +59,10 @@ class TaskStatusController extends Controller
 
         TaskStatus::create($request->all());
         
-        return redirect()->route('task_statuses.index')
-            ->with('success', 'Статус успешно создан');
+        return redirect()->route('task_statuses.index')->with('alert', [
+            'type' => 'success',
+            'message' => 'Статус успешно создан'
+        ]);
     }
 
     public function edit(TaskStatus $taskStatus)
@@ -83,8 +83,10 @@ class TaskStatusController extends Controller
 
         $taskStatus->update($request->all());
         
-        return redirect()->route('task_statuses.index')
-            ->with('success', 'Статус успешно обновлён');
+        return redirect()->route('task_statuses.index')->with('alert', [
+            'type' => 'success',
+            'message' => 'Статус успешно обновлён'
+        ]);
     }
 
     public function destroy(TaskStatus $taskStatus)
@@ -92,11 +94,17 @@ class TaskStatusController extends Controller
         try {
             $taskStatus->delete();
             return redirect()->route('task_statuses.index')
-                             ->with('success', 'Статус успешно удалён');
+                             ->with('alert', [
+                                    'type' => 'success',
+                                    'message' => 'Статус успешно удалён'
+                                ]);
         } catch (QueryException $e) {
             if ($e->getCode() == 23000) {
                 return redirect()->back()
-                                 ->with('error', 'Нельзя удалить статус с привязанными задачами');
+                                 ->with('alert', [
+                                    'type' => 'danger',
+                                    'message' => 'Не удалось удалить статус'
+                                ]);
             }
         return redirect()->back()->with('error', 'Произошла ошибка при удалении');
         }
