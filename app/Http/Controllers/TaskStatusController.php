@@ -10,16 +10,6 @@ use Illuminate\Routing\Controller;
 
 class TaskStatusController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth.forbidden')->only([
-            'edit', 
-            'update', 
-            'destroy', 
-            'create',
-            'store'
-        ]);
-    }
     /**
      * Display a listing of the resource.
      *
