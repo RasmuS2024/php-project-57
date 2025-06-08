@@ -33,7 +33,7 @@ class TaskStatusController extends Controller
 
     public function show($id)
     {
-        abort(403, 'Просмотр статусов запрещён');
+        abort(403);
     }
     /**
      * Show the form for creating a new resource.

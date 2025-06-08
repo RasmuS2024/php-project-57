@@ -10,15 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Http\Middleware\AuthenticateWithForbidden;
-
-
 use Illuminate\Support\Str;
-
-/*
-use Illuminate\Support\Facades\Auth;
-Auth::routes(['reset' => true]);
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,13 +24,14 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('tasks', TaskController::class);
 
-Route::resource('task_statuses', TaskStatusController::class)->except(['show']);
+Route::resource('task_statuses', TaskStatusController::class);
+//Route::resource('task_statuses', TaskStatusController::class)->except(['show']);
 
-Route::get('task_statuses/{id}', [TaskStatusController::class, 'show'])->name('task_statuses.show');
+//Route::get('task_statuses/{id}', [TaskStatusController::class, 'show'])->name('task_statuses.show');
 
 Route::resource('labels', LabelController::class);
 
-Route::get('labels/{id}', [LabelController::class, 'show'])->name('labels.show');
+//Route::get('labels/{id}', [LabelController::class, 'show'])->name('labels.show');
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');

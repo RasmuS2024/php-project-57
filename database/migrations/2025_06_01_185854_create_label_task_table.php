@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('label_task', function (Blueprint $table) {
             $table->id();
             $table->foreignId('task_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('label_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('label_id');
+            $table->foreign('label_id')
+                ->references('id')->on('labels')
+                ->onDelete('restrict');
             $table->unique(['task_id', 'label_id']);
         });
     }

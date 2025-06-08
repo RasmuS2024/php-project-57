@@ -42,7 +42,6 @@
                         @enderror
                     </div>
 
-                    <!-- Статус (исправлено, теперь обязательно) -->
                     <div class="mt-2">
                         <label for="status_id">Статус</label>
                     </div>

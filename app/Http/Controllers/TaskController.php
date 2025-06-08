@@ -42,7 +42,7 @@ public function store(Request $request)
         'status_id' => 'required|exists:task_statuses,id',
         'assigned_to_id' => 'nullable|exists:users,id',
         'labels' => 'nullable|array',
-        'labels.*' => 'exists:labels,id' // Проверка каждой метки
+        'labels.*' => 'exists:labels,id'
     ]);
 
     $task = Task::create([
@@ -65,6 +65,8 @@ public function store(Request $request)
 
     public function show(Task $task)
     {
+        // return view('tasks.show', compact('task'));
+        $task->load('status', 'creator', 'assignee', 'labels');
         return view('tasks.show', compact('task'));
     }
 
@@ -87,13 +89,17 @@ public function store(Request $request)
             'description' => 'nullable|string',
             'status_id' => 'required|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',
+            'labels' => 'nullable|array',
+            'labels.*' => 'exists:labels,id'
         ]);
 
         $task->update($validated);
-        return redirect()->route('tasks.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'Задача успешно изменена'
-        ]);
+        $task->labels()->sync($request->labels ?? []);
+        return redirect()->route('tasks.index')
+            ->with('alert', [
+                'type' => 'success',
+                'message' => 'Задача успешно изменена'
+            ]);
     }
 
     public function destroy(Task $task)

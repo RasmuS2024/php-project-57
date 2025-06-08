@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\QueryException;
 
 class LabelController extends Controller
 {
@@ -27,12 +28,15 @@ class LabelController extends Controller
         ]);
 
         Label::create($request->all());
-        return redirect()->route('labels.index')->with('success', 'Метка создана');
+        return redirect()->route('labels.index')->with('alert', [
+                                    'type' => 'success',
+                                    'message' => 'Метка создана'
+                                ]);
     }
 
-    public function show(Label $label)
+    public function show($id)
     {
-        return view('labels.show', compact('label'));
+        abort(403);
     }
 
     public function edit(Label $label)
@@ -52,12 +56,36 @@ class LabelController extends Controller
         ]);
 
         $label->update($request->all());
-        return redirect()->route('labels.index')->with('success', 'Метка обновлена');
+        return redirect()->route('labels.index')->with('alert', [
+                                    'type' => 'success',
+                                    'message' => 'Метка обновлена'
+                                ]);
     }
 
     public function destroy(Label $label)
     {
-        $label->delete();
-        return redirect()->route('labels.index')->with('success', 'Метка удалена');
+        if ($label->tasks()->exists()) {
+            return redirect()->route('labels.index')
+                ->with('alert', [
+                    'type' => 'danger',
+                    'message' => 'Не удалось удалить метку'
+                ]);
+        }
+        try {
+            $label->delete();
+            return redirect()->route('labels.index')
+                             ->with('alert', [
+                                    'type' => 'success',
+                                    'message' => 'Метка успешно удалена'
+                                ]);
+        } catch (QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return redirect()->route('labels.index')
+                    ->with('alert', [
+                        'type' => 'danger',
+                        'message' => 'При удалении метки произошла ошибка: ' . $e->getMessage()
+                    ]);
+            }
+        }
     }
 }
