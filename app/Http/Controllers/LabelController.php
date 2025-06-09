@@ -24,7 +24,10 @@ class LabelController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:labels|max:255',
-            'description' => 'nullable|string'
+        ], [
+            'name.unique' => trans('validation.custom.name.unique', [
+                'entity' => 'Метка'
+            ])
         ]);
 
         Label::create($request->all());

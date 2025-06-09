@@ -15,11 +15,10 @@
                             ->value(old('name'))
                             ->class('rounded border-gray-300 w-1/3')
                             ->classIf($errors->has('name'), 'border-red-500')
-                            ->required()
                             ->attribute('autocomplete', 'off')
                         }}
                         @error('name')
-                            <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
+                            <div class="text-rose-600">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mt-4">
@@ -31,9 +30,6 @@
                             ->class('rounded border-gray-300 w-1/3 h-32')
                             ->classIf($errors->has('description'), 'border-red-500')
                         }}
-                        @error('description')
-                            <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="mt-4">
                         {{ html()->button('Создать')

@@ -21,7 +21,7 @@
                             ->id('name') }}
                         
                         @error('name')
-                            <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+                            <div class="text-rose-600">{{ $message }}</div>
                         @enderror
                     </div>
                     
