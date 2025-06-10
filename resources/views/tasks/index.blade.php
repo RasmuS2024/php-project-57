@@ -76,24 +76,31 @@
                             <td class="p-2">{{ $task->creator->name }}</td>
                             <td class="p-2">{{ $task->assignee->name ?? '-' }}</td>
                             <td class="p-2">{{ $task->created_at->format('d.m.Y') }}</td>
-                            <td class="p-2">
-                                <div class="flex items-center space-x-2">
-                                    @auth
+                            @auth
+                                <td class="p-2">
+                                    <div class="flex items-center space-x-4">
                                         @if($task->created_by_id === auth()->id())
-                                            {{ html()->form('DELETE', route('tasks.destroy', $task))->open() }}
-                                                {{ html()->button('Удалить')
-                                                    ->class('text-red-600 hover:text-red-900')
-                                                    ->type('submit')
-                                                    ->attribute('onclick', 'return confirm("Вы уверены?")')
-                                                }}
+                                            {{ html()->a('#', 'Удалить')
+                                                ->class('text-red-600 hover:text-red-900')
+                                                // Обновленный обработчик с подтверждением
+                                                ->attribute('onclick', 'event.preventDefault(); if(confirm(\'Вы уверены?\')) { document.getElementById(\'delete-form-'.$task->id.'\').submit() }')
+                                                ->attribute('dusk', 'delete-link-'.$task->id)
+                                            }}
+                                            {{ html()->form('DELETE', route('tasks.destroy', $task))
+                                                ->id('delete-form-'.$task->id)
+                                                ->class('hidden')
+                                                ->open() 
+                                            }}
                                             {{ html()->form()->close() }}
                                         @endif
-                                    {{ html()->a(route('tasks.edit', $task), 'Изменить')
-                                        ->class('text-blue-600 hover:text-blue-900')
-                                    }}
-                                    @endauth
-                                </div>
-                            </td>
+                                        &nbsp;
+                                        {{ html()->a(route('tasks.edit', $task), 'Изменить')
+                                            ->class('text-blue-600 hover:text-blue-900')
+                                            ->attribute('dusk', 'edit-link-'.$task->id)
+                                        }}
+                                    </div>
+                                </td>
+                            @endauth
                         </tr>
                     @endforeach
                 </tbody>

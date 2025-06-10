@@ -42,24 +42,23 @@
                                 <td>{{ $label->created_at->format('d.m.Y') }}</td>
                                 @auth
                                     <td>
-                                        <div class="flex items-center">
-                                            {!! Html::a(route('labels.edit', $label), 'Изменить')
-                                                ->class('text-blue-600 hover:text-blue-900') 
-                                            !!}
-                                            
-                                            {!! Html::form()
-                                                ->action(route('labels.destroy', $label))
-                                                ->method('POST') // Основной метод - POST
-                                                ->class('ml-2 inline')
-                                                ->children([
-                                                    Html::hidden('_method')->value('DELETE'), // Переопределение метода
-                                                    Html::token(), // CSRF-токен
-                                                    Html::button('Удалить')
-                                                        ->type('submit')
-                                                        ->class('text-red-600 hover:text-red-900 bg-transparent border-none p-0 cursor-pointer')
-                                                        ->attribute('onclick', "return confirm('Вы уверены?')")
-                                                ])
-                                            !!}
+                                        <div class="flex items-center space-x-4">
+                                            {{ html()->a('#', 'Удалить')
+                                                ->class('text-red-600 hover:text-red-900')
+                                                ->attribute('onclick', 'event.preventDefault(); if(confirm(\'Вы уверены?\')) { document.getElementById(\'delete-form-'.$label->id.'\').submit() }')
+                                                ->attribute('dusk', 'delete-link-'.$label->id)
+                                            }}
+                                            {{ html()->form('DELETE', route('labels.destroy', $label))
+                                                ->id('delete-form-'.$label->id)
+                                                ->class('hidden')
+                                                ->open() 
+                                            }}
+                                            {{ html()->form()->close() }}
+                                            &nbsp;
+                                            {{ html()->a(route('labels.edit', $label), 'Изменить')
+                                                ->class('text-blue-600 hover:text-blue-900')
+                                                ->attribute('dusk', 'edit-link-'.$label->id)
+                                            }}
                                         </div>
                                     </td>
                                 @endauth

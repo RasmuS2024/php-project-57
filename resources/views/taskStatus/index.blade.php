@@ -37,20 +37,24 @@
                             <td>{{ $status->name }}</td>
                             <td>{{ $status->created_at->format('d.m.Y') }}</td>
                             @auth
-                                <td>
-                                    <div class="flex items-center"> 
-                                        {{ html()->a(route('task_statuses.edit', $status), 'Изменить')
-                                            ->class('text-blue-600 hover:text-blue-900') }}
-                                        
+                                <td class="p-2">
+                                    <div class="flex items-center space-x-4">
+                                        {{ html()->a('#', 'Удалить')
+                                            ->class('text-red-600 hover:text-red-900')
+                                            ->attribute('onclick', 'event.preventDefault(); if(confirm(\'Вы уверены?\')) { document.getElementById(\'delete-form-'.$status->id.'\').submit() }')
+                                            ->attribute('dusk', 'delete-link-'.$status->id)
+                                        }}
                                         {{ html()->form('DELETE', route('task_statuses.destroy', $status))
-                                            ->class('ml-2')
-                                            ->open() }}
-                                            @csrf
-                                            {{ html()->button('Удалить')
-                                                ->type('submit')
-                                                ->class('text-red-600 hover:text-red-900')
-                                                ->attribute('onclick', "return confirm('Вы уверены?')") }}
+                                            ->id('delete-form-'.$status->id)
+                                            ->class('hidden')
+                                            ->open() 
+                                        }}
                                         {{ html()->form()->close() }}
+                                        &nbsp;
+                                        {{ html()->a(route('task_statuses.edit', $status), 'Изменить')
+                                            ->class('text-blue-600 hover:text-blue-900')
+                                            ->attribute('dusk', 'edit-link-'.$status->id)
+                                        }}
                                     </div>
                                 </td>
                             @endauth
