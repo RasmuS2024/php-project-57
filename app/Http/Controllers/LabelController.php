@@ -33,7 +33,7 @@ class LabelController extends Controller
         Label::create($request->all());
         return redirect()->route('labels.index')->with('alert', [
                                     'type' => 'success',
-                                    'message' => 'Метка создана'
+                                    'message' => 'Метка успешно создана'
                                 ]);
     }
 
@@ -61,7 +61,7 @@ class LabelController extends Controller
         $label->update($request->all());
         return redirect()->route('labels.index')->with('alert', [
                                     'type' => 'success',
-                                    'message' => 'Метка обновлена'
+                                    'message' => 'Метка успешно изменена'
                                 ]);
     }
 

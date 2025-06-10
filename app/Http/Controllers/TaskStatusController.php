@@ -79,7 +79,7 @@ class TaskStatusController extends Controller
         
         return redirect()->route('task_statuses.index')->with('alert', [
             'type' => 'success',
-            'message' => 'Статус успешно обновлён'
+            'message' => 'Статус успешно изменён'
         ]);
     }
 
