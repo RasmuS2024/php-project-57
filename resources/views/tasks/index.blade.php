@@ -58,7 +58,9 @@
                         <th class="p-2">Автор</th>
                         <th class="p-2">Исполнитель</th>
                         <th class="p-2">Дата создания</th>
+                        @auth
                         <th class="p-2">Действия</th>
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
@@ -86,11 +88,10 @@
                                                 }}
                                             {{ html()->form()->close() }}
                                         @endif
-                                    @endauth
-                                    
                                     {{ html()->a(route('tasks.edit', $task), 'Изменить')
                                         ->class('text-blue-600 hover:text-blue-900')
                                     }}
+                                    @endauth
                                 </div>
                             </td>
                         </tr>

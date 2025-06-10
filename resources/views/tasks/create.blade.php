@@ -16,7 +16,6 @@
                             ->class('rounded border-gray-300 w-1/3')
                             ->classIf($errors->has('name'), 'border-red-500')
                             ->value(old('name'))
-                            ->required()
                             ->attribute('autocomplete', 'off')
                         }}
                         @error('name')
@@ -47,7 +46,6 @@
                             ->classIf($errors->has('status_id'), 'border-red-500')
                             ->placeholder('-- Выберите статус --')
                             ->value(old('status_id'))
-                            ->required()
                         }}
                         @error('status_id')
                             <div class="text-rose-600">{{ $message }}</div>

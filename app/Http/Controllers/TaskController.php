@@ -43,7 +43,12 @@ public function store(Request $request)
         'assigned_to_id' => 'nullable|exists:users,id',
         'labels' => 'nullable|array',
         'labels.*' => 'exists:labels,id'
-    ]);
+    ], [
+            'name.unique' => trans('validation.custom.name.unique', [
+                'entity' => 'Задача'
+            ])
+        ]
+    );
 
     $task = Task::create([
         'name' => $validated['name'],
