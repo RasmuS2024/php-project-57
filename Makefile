@@ -9,5 +9,5 @@ validate:
 	composer validate
 
 lint:
-	composer exec phpcs
+	composer exec -v phpcs .
 	composer exec -v phpstan analyse -- -c phpstan.neon --ansi

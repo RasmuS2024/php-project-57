@@ -32,7 +32,10 @@
     </php>
     <coverage>
         <report>
-            <clover outputFile="reports/coverage.xml"/>
+            <clover outputFile="build/coverage.xml"/>
         </report>
     </coverage>
+    <logging>
+        <junit outputFile="build/test-reports.xml"/>
+    </logging>
 </phpunit>

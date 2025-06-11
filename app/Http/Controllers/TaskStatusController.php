@@ -10,11 +10,6 @@ use Illuminate\Routing\Controller;
 
 class TaskStatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $taskStatuses = TaskStatus::orderBy('id')->paginate(15);
@@ -25,22 +20,12 @@ class TaskStatusController extends Controller
     {
         abort(403);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('taskStatus.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -61,7 +46,6 @@ class TaskStatusController extends Controller
     {
         return view('taskStatus.edit', compact('taskStatus'));
     }
-
 
     public function update(Request $request, TaskStatus $taskStatus)
     {
