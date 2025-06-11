@@ -82,7 +82,7 @@ class LabelController extends Controller
                                     'message' => 'Метка успешно удалена'
                                 ]);
         } catch (QueryException $e) {
-            if ($e->getCode() == 23000) {
+            if ($e->getCode() === 23000) {
                 return redirect()->route('labels.index')
                     ->with('alert', [
                         'type' => 'danger',

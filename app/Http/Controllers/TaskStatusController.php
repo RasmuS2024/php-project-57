@@ -91,7 +91,7 @@ class TaskStatusController extends Controller
                                     'message' => 'Статус успешно удалён'
                                 ]);
         } catch (QueryException $e) {
-            if ($e->getCode() == 23000) {
+            if ($e->getCode() === 23000) {
                 return redirect()->back()
                                  ->with('alert', [
                                     'type' => 'danger',
