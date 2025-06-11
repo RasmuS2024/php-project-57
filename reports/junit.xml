@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="/home/user5/projects/php-project-57/phpunit.xml" tests="23" assertions="37" errors="1" failures="9" skipped="0" time="157.119478">
-    <testsuite name="Feature" tests="23" assertions="37" errors="1" failures="9" skipped="0" time="157.119478">
-      <testsuite name="Tests\Feature\TaskControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" tests="14" assertions="23" errors="0" failures="4" skipped="0" time="132.491584">
-        <testcase name="testIndex" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="30" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="2" time="39.993206"/>
-        <testcase name="testIndexWithFilters" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="37" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="2" time="5.763851"/>
-        <testcase name="testCreateForAuthenticatedUser" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="46" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="7.018094"/>
-        <testcase name="testCreateForGuest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="54" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="6.950995">
+  <testsuite name="/home/user5/projects/php-project-57/phpunit.xml" tests="23" assertions="37" errors="1" failures="9" skipped="0" time="155.867224">
+    <testsuite name="Feature" tests="23" assertions="37" errors="1" failures="9" skipped="0" time="155.867224">
+      <testsuite name="Tests\Feature\TaskControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" tests="14" assertions="23" errors="0" failures="4" skipped="0" time="130.380525">
+        <testcase name="testIndex" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="30" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="2" time="39.182970"/>
+        <testcase name="testIndexWithFilters" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="37" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="2" time="5.743824"/>
+        <testcase name="testCreateForAuthenticatedUser" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="46" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="6.898482"/>
+        <testcase name="testCreateForGuest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="54" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="7.110743">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskControllerTest::testCreateForGuest
 Expected response status code [201, 301, 302, 303, 307, 308] but received 200.
 Failed asserting that false is true.
@@ -15,7 +15,7 @@ Failed asserting that false is true.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/TestResponse.php:199
 /home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php:57</failure>
         </testcase>
-        <testcase name="testStore" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="60" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="5.685646">
+        <testcase name="testStore" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="60" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="5.531767">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskControllerTest::testStore
 Expected response status code [201, 301, 302, 303, 307, 308] but received 500.
 Failed asserting that false is true.
@@ -95,9 +95,9 @@ Undefined array key "description"
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/TestResponse.php:199
 /home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php:69</failure>
         </testcase>
-        <testcase name="testShow" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="77" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="2" time="6.989560"/>
-        <testcase name="testEditForCreator" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="84" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.155497"/>
-        <testcase name="testEditForGuest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="91" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.140765">
+        <testcase name="testShow" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="77" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="2" time="7.029110"/>
+        <testcase name="testEditForCreator" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="84" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.081315"/>
+        <testcase name="testEditForGuest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="91" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.023066">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskControllerTest::testEditForGuest
 Expected response status code [201, 301, 302, 303, 307, 308] but received 200.
 Failed asserting that false is true.
@@ -106,9 +106,9 @@ Failed asserting that false is true.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/TestResponse.php:199
 /home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php:94</failure>
         </testcase>
-        <testcase name="testUpdate" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="97" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="4" time="6.949800"/>
-        <testcase name="testDestroyByCreator" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="113" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="4" time="5.842653"/>
-        <testcase name="testDestroyByOtherUser" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="125" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="5.904064">
+        <testcase name="testUpdate" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="97" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="4" time="6.871231"/>
+        <testcase name="testDestroyByCreator" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="113" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="4" time="5.581208"/>
+        <testcase name="testDestroyByOtherUser" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="125" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="5.596195">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskControllerTest::testDestroyByOtherUser
 Expected response status code [403] but received 302.
 Failed asserting that 302 is identical to 403.
@@ -118,13 +118,13 @@ Failed asserting that 302 is identical to 403.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:141
 /home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php:130</failure>
         </testcase>
-        <testcase name="testDeleteLinkVisibilityForCreator" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="134" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.165555"/>
-        <testcase name="testDeleteLinkNotVisibleForOtherUsers" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="141" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.699282"/>
-        <testcase name="testDeleteLinkNotVisibleForGuests" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="149" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.232614"/>
+        <testcase name="testDeleteLinkVisibilityForCreator" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="134" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="7.987743"/>
+        <testcase name="testDeleteLinkNotVisibleForOtherUsers" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="141" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.696574"/>
+        <testcase name="testDeleteLinkNotVisibleForGuests" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="149" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="8.046298"/>
       </testsuite>
-      <testsuite name="Tests\Feature\TaskStatusControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" tests="9" assertions="14" errors="1" failures="5" skipped="0" time="24.627894">
-        <testcase name="testIndexPage" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="23" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="5.207491"/>
-        <testcase name="testCreatePageAccess" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="31" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="1.070197">
+      <testsuite name="Tests\Feature\TaskStatusControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" tests="9" assertions="14" errors="1" failures="5" skipped="0" time="25.486699">
+        <testcase name="testIndexPage" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="23" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="5.110329"/>
+        <testcase name="testCreatePageAccess" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="31" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="0.998737">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskStatusControllerTest::testCreatePageAccess
 Expected response status code [403] but received 200.
 Failed asserting that 200 is identical to 403.
@@ -134,7 +134,7 @@ Failed asserting that 200 is identical to 403.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:141
 /home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php:34</failure>
         </testcase>
-        <testcase name="testStoreStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="40" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="2.210147">
+        <testcase name="testStoreStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="40" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="3.194929">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskStatusControllerTest::testStoreStatus
 Expected response status code [403] but received 302.
 Failed asserting that 302 is identical to 403.
@@ -144,9 +144,9 @@ Failed asserting that 302 is identical to 403.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:141
 /home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php:44</failure>
         </testcase>
-        <testcase name="testStoreValidation" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="51" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="1.065177"/>
-        <testcase name="testShowForbidden" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="58" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="1.657939"/>
-        <testcase name="testEditPage" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="66" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="2.278039">
+        <testcase name="testStoreValidation" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="51" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="1.021525"/>
+        <testcase name="testShowForbidden" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="58" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="2.082665"/>
+        <testcase name="testEditPage" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="66" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="2.204029">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskStatusControllerTest::testEditPage
 Expected response status code [403] but received 200.
 Failed asserting that 200 is identical to 403.
@@ -156,7 +156,7 @@ Failed asserting that 200 is identical to 403.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:141
 /home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php:70</failure>
         </testcase>
-        <testcase name="testUpdateStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="77" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="3.462854">
+        <testcase name="testUpdateStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="77" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="3.332248">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskStatusControllerTest::testUpdateStatus
 Expected response status code [403] but received 302.
 Failed asserting that 302 is identical to 403.
@@ -166,7 +166,7 @@ Failed asserting that 302 is identical to 403.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:141
 /home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php:82</failure>
         </testcase>
-        <testcase name="testDestroyStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="89" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="2.783734">
+        <testcase name="testDestroyStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="89" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="2.830135">
           <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\TaskStatusControllerTest::testDestroyStatus
 Expected response status code [403] but received 302.
 Failed asserting that 302 is identical to 403.
@@ -176,7 +176,7 @@ Failed asserting that 302 is identical to 403.
 /home/user5/projects/php-project-57/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:141
 /home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php:93</failure>
         </testcase>
-        <testcase name="testDestroyProtectedStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="100" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="3" time="4.892316">
+        <testcase name="testDestroyProtectedStatus" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="100" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="3" time="4.712103">
           <error type="Illuminate\Database\QueryException">Tests\Feature\TaskStatusControllerTest::testDestroyProtectedStatus
 Illuminate\Database\QueryException: SQLSTATE[25P02]: In failed sql transaction: 7 ERROR:  current transaction is aborted, commands ignored until end of transaction block (Connection: sqlite, SQL: select exists(select * from "task_statuses" where ("id" = 39)) as "exists")
 
