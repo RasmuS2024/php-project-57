@@ -34,43 +34,41 @@ class TaskController extends Controller
         ]);
     }
 
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'status_id' => 'required|exists:task_statuses,id',
-        'assigned_to_id' => 'nullable|exists:users,id',
-        'labels' => 'nullable|array',
-        'labels.*' => 'exists:labels,id'
-    ], [
-            'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => 'Задача'
-            ])
-        ]
-    );
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status_id' => 'required|exists:task_statuses,id',
+            'assigned_to_id' => 'nullable|exists:users,id',
+            'labels' => 'nullable|array',
+            'labels.*' => 'exists:labels,id'
+        ], [
+                'name.unique' => trans('validation.custom.name.unique', [
+                    'entity' => 'Задача'
+                ])
+        ]);
 
-    $task = Task::create([
-        'name' => $validated['name'],
-        'description' => $validated['description'],
-        'status_id' => $validated['status_id'],
-        'assigned_to_id' => $validated['assigned_to_id'],
-        'created_by_id' => auth()->id()
-    ]);
+        $task = Task::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'status_id' => $validated['status_id'],
+            'assigned_to_id' => $validated['assigned_to_id'],
+            'created_by_id' => auth()->id()
+        ]);
 
-    if (isset($validated['labels'])) {
-        $task->labels()->sync($validated['labels']);
+        if (isset($validated['labels'])) {
+            $task->labels()->sync($validated['labels']);
+        }
+
+        return redirect()->route('tasks.index')->with('alert', [
+            'type' => 'success',
+            'message' => 'Задача успешно создана'
+        ]);
     }
-
-    return redirect()->route('tasks.index')->with('alert', [
-        'type' => 'success',
-        'message' => 'Задача успешно создана'
-    ]);
-}
 
     public function show(Task $task)
     {
-        // return view('tasks.show', compact('task'));
         $task->load('status', 'creator', 'assignee', 'labels');
         return view('tasks.show', compact('task'));
     }

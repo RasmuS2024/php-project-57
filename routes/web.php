@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Str;
 
+require __DIR__ . '/auth.php';
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -25,13 +27,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('tasks', TaskController::class);
 
 Route::resource('task_statuses', TaskStatusController::class);
-//Route::resource('task_statuses', TaskStatusController::class)->except(['show']);
-
-//Route::get('task_statuses/{id}', [TaskStatusController::class, 'show'])->name('task_statuses.show');
 
 Route::resource('labels', LabelController::class);
-
-//Route::get('labels/{id}', [LabelController::class, 'show'])->name('labels.show');
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
@@ -80,5 +77,3 @@ Route::post('/reset-password', function (Request $request) {
                 ? redirect()->route('login')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
-
-require __DIR__.'/auth.php';

@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ResetPasswordNotification extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $token;
 

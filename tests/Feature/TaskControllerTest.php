@@ -12,25 +12,21 @@ use Tests\TestCase;
 class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     private $user;
     private $status;
     private $label;
     private $task;
 
-
     protected function setUp(): void
     {
         parent::setUp();
-        
-        // Создаем тестовые данные
         $this->user = User::factory()->create();
         $this->status = TaskStatus::factory()->create();
         $this->label = Label::factory()->create();
         $this->task = Task::factory()->create(['created_by_id' => $this->user->id]);
     }
 
-    // Index Tests
     public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
@@ -43,16 +39,14 @@ class TaskControllerTest extends TestCase
         $response = $this->get(route('tasks.index', [
             'filter' => ['status_id' => $this->status->id]
         ]));
-        
         $response->assertOk();
         $response->assertViewHas('tasks');
     }
 
-    // Create Tests
     public function testCreateForAuthenticatedUser(): void
     {
         $this->actingAs($this->user);
-        
+
         $response = $this->get(route('tasks.create'));
         $response->assertOk();
     }
@@ -63,17 +57,14 @@ class TaskControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    // Store Tests
     public function testStore(): void
     {
         $this->actingAs($this->user);
-        
         $taskData = [
             'name' => 'New Task',
             'status_id' => $this->status->id,
             'labels' => [$this->label->id]
         ];
-        
         $response = $this->post(route('tasks.store'), $taskData);
         $response->assertRedirect(route('tasks.index'));
         $this->assertDatabaseHas('tasks', ['name' => 'New Task']);
@@ -83,7 +74,6 @@ class TaskControllerTest extends TestCase
         ]);
     }
 
-    // Show Tests
     public function testShow(): void
     {
         $response = $this->get(route('tasks.show', $this->task));
@@ -91,11 +81,9 @@ class TaskControllerTest extends TestCase
         $response->assertViewHas('task', $this->task);
     }
 
-    // Edit Tests
     public function testEditForCreator(): void
     {
         $this->actingAs($this->user);
-        
         $response = $this->get(route('tasks.edit', $this->task));
         $response->assertOk();
     }
@@ -106,16 +94,13 @@ class TaskControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    // Update Tests
     public function testUpdate(): void
     {
         $this->actingAs($this->user);
-        
         $updateData = [
             'name' => 'Updated Task',
             'status_id' => $this->status->id,
         ];
-        
         $response = $this->put(route('tasks.update', $this->task), $updateData);
         $response->assertRedirect(route('tasks.index'));
         $this->assertDatabaseHas('tasks', ['name' => 'Updated Task']);
@@ -125,11 +110,9 @@ class TaskControllerTest extends TestCase
         ]);
     }
 
-    // Destroy Tests
     public function testDestroyByCreator(): void
     {
         $this->actingAs($this->user);
-        
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertRedirect(route('tasks.index'));
         $this->assertDatabaseMissing('tasks', ['id' => $this->task->id]);
@@ -143,17 +126,15 @@ class TaskControllerTest extends TestCase
     {
         $otherUser = User::factory()->create();
         $this->actingAs($otherUser);
-        
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertForbidden();
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
     }
 
-        public function testDeleteLinkVisibilityForCreator()
+    public function testDeleteLinkVisibilityForCreator()
     {
         $this->actingAs($this->user);
         $response = $this->get(route('tasks.index'));
-        
         $response->assertSee('Удалить');
     }
 
@@ -161,9 +142,7 @@ class TaskControllerTest extends TestCase
     {
         $otherUser = User::factory()->create();
         $this->actingAs($otherUser);
-        
         $response = $this->get(route('tasks.index'));
-        
         $response->assertDontSee('Удалить');
     }
 

@@ -31,7 +31,7 @@ class TaskStatusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         return view('taskStatus.create');
     }
 
@@ -50,9 +50,7 @@ class TaskStatusController extends Controller
                 'entity' => 'Статус'
             ])
         ]);
-
         TaskStatus::create($request->all());
-        
         return redirect()->route('task_statuses.index')->with('alert', [
             'type' => 'success',
             'message' => 'Статус успешно создан'
@@ -76,7 +74,7 @@ class TaskStatusController extends Controller
         ]);
 
         $taskStatus->update($request->all());
-        
+
         return redirect()->route('task_statuses.index')->with('alert', [
             'type' => 'success',
             'message' => 'Статус успешно изменён'
@@ -100,7 +98,7 @@ class TaskStatusController extends Controller
                                     'message' => 'Не удалось удалить статус'
                                 ]);
             }
-        return redirect()->back()->with('error', 'Произошла ошибка при удалении');
+            return redirect()->back()->with('error', 'Произошла ошибка при удалении');
         }
     }
 }
