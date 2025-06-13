@@ -16,11 +16,10 @@
                 @auth
                     <div>
                         {!! Html::a(route('labels.create'), 'Создать метку')
-                            ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') 
+                            ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded')
                         !!}
                     </div>
                 @endauth
-
                 <table class="mt-4">
                     <thead class="border-b-2 border-solid border-black text-left">
                         <tr>
@@ -51,7 +50,7 @@
                                             {{ html()->form('DELETE', route('labels.destroy', $label))
                                                 ->id('delete-form-'.$label->id)
                                                 ->class('hidden')
-                                                ->open() 
+                                                ->open()
                                             }}
                                             {{ html()->form()->close() }}
                                             &nbsp;

@@ -89,7 +89,7 @@
                                             {{ html()->form('DELETE', route('tasks.destroy', $task))
                                                 ->id('delete-form-'.$task->id)
                                                 ->class('hidden')
-                                                ->open() 
+                                                ->open()
                                             }}
                                             {{ html()->form()->close() }}
                                         @endif

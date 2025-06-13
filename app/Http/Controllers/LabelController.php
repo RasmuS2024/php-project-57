@@ -37,7 +37,7 @@ class LabelController extends Controller
                                 ]);
     }
 
-    public function show($id)
+    public function show()
     {
         abort(403);
     }

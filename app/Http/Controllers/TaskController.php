@@ -25,8 +25,6 @@ class TaskController extends Controller
 
     public function create()
     {
-        $statuses = TaskStatus::pluck('name', 'id');
-        $users = User::pluck('name', 'id');
         return view('tasks.create', [
             'statuses' => TaskStatus::all(),
             'users' => User::all(),
@@ -75,8 +73,6 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $statuses = TaskStatus::pluck('name', 'id');
-        $users = User::pluck('name', 'id');
         return view('tasks.edit', [
             'task' => $task,
             'statuses' => TaskStatus::all(),

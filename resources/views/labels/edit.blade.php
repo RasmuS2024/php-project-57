@@ -5,10 +5,8 @@
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         <div class="grid col-span-full">
             <h1 class="mb-5">Изменение метки</h1>
-            
             {{ html()->modelForm($label, 'PATCH', route('labels.update', $label))->class('flex flex-col')->open() }}
                 <div class="flex flex-col">
-                    <!-- Поле имени -->
                     <div>
                         {{ html()->label('Имя', 'name') }}
                     </div>
@@ -22,8 +20,6 @@
                             <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
-                    
-                    <!-- Поле описания -->
                     <div class="mt-4">
                         {{ html()->label('Описание', 'description') }}
                     </div>
@@ -36,8 +32,6 @@
                             <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
-                    
-                    <!-- Кнопка обновления -->
                     <div class="mt-4">
                         {{ html()->button('Обновить')
                             ->type('submit')

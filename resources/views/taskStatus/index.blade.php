@@ -47,7 +47,7 @@
                                         {{ html()->form('DELETE', route('task_statuses.destroy', $status))
                                             ->id('delete-form-'.$status->id)
                                             ->class('hidden')
-                                            ->open() 
+                                            ->open()
                                         }}
                                         {{ html()->form()->close() }}
                                         &nbsp;

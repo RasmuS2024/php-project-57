@@ -13,6 +13,9 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'reset_password' => [
+        'url' => '/reset-password?token={token}&email={email}',
+    ],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

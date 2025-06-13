@@ -11,9 +11,8 @@
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
                     Выход
                 </a>
-
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </form>
             @else
                 <a href="{{ route('login') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -26,7 +25,6 @@
                 @endif
             @endauth
         </div>
-
         <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <li>

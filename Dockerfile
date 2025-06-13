@@ -15,13 +15,11 @@ RUN apt-get install -y nodejs
 
 WORKDIR /app
 
-
-
 COPY . .
 RUN composer install
 RUN npm ci
 RUN npm run build
 
-CMD bash -c "php artisan config:clear && \
-             php artisan migrate --force && \
-             php artisan serve --host=0.0.0.0 --port=${PORT}"
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+CMD ["docker-entrypoint.sh"]
