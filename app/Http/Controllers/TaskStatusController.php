@@ -15,7 +15,7 @@ class TaskStatusController extends Controller
         return view('taskStatus.index', compact('taskStatuses'));
     }
 
-    public function show($id)
+    public function show()
     {
         abort(403);
     }
