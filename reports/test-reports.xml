@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/home/user5/projects/php-project-57/phpunit.xml" tests="21" assertions="42" errors="0" failures="0" skipped="0" time="1.708680">
+    <testsuite name="Feature" tests="21" assertions="42" errors="0" failures="0" skipped="0" time="1.708680">
+      <testsuite name="Tests\Feature\LabelControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" tests="7" assertions="15" errors="0" failures="0" skipped="0" time="0.889793">
+        <testcase name="testIndex" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="22" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="1" time="0.546531"/>
+        <testcase name="testCreate" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="28" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="1" time="0.057885"/>
+        <testcase name="testStore" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="34" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="3" time="0.071441"/>
+        <testcase name="testEdit" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="42" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="1" time="0.040112"/>
+        <testcase name="testUpdate" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="48" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="3" time="0.039276"/>
+        <testcase name="testDestroy" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="56" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="3" time="0.044991"/>
+        <testcase name="testDestroyWithAssociatedTask" file="/home/user5/projects/php-project-57/tests/Feature/LabelControllerTest.php" line="63" class="Tests\Feature\LabelControllerTest" classname="Tests.Feature.LabelControllerTest" assertions="3" time="0.089559"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\TaskControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" tests="7" assertions="13" errors="0" failures="0" skipped="0" time="0.463839">
+        <testcase name="testIndex" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="28" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="0.107758"/>
+        <testcase name="testCreate" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="34" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="0.055536"/>
+        <testcase name="testStore" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="41" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="3" time="0.064534"/>
+        <testcase name="testShow" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="60" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="0.057800"/>
+        <testcase name="testEdit" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="66" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="1" time="0.061700"/>
+        <testcase name="testUpdate" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="73" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="3" time="0.057865"/>
+        <testcase name="testDestroy" file="/home/user5/projects/php-project-57/tests/Feature/TaskControllerTest.php" line="91" class="Tests\Feature\TaskControllerTest" classname="Tests.Feature.TaskControllerTest" assertions="3" time="0.058646"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\TaskStatusControllerTest" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" tests="7" assertions="14" errors="0" failures="0" skipped="0" time="0.355048">
+        <testcase name="testIndex" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="22" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="0.069304"/>
+        <testcase name="testCreate" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="28" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="0.056682"/>
+        <testcase name="testStore" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="34" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="3" time="0.043340"/>
+        <testcase name="testEdit" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="42" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="1" time="0.045085"/>
+        <testcase name="testUpdate" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="48" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="3" time="0.044838"/>
+        <testcase name="testDestroy" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="56" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="3" time="0.036557"/>
+        <testcase name="testDestroyWithAssociatedTask" file="/home/user5/projects/php-project-57/tests/Feature/TaskStatusControllerTest.php" line="63" class="Tests\Feature\TaskStatusControllerTest" classname="Tests.Feature.TaskStatusControllerTest" assertions="2" time="0.059242"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

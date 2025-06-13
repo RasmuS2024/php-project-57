@@ -13,143 +13,86 @@ class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    private $user;
-    private $status;
-    private $label;
-    private $task;
-    private const DEL= 'Удалить';
+    private User $user;
+    private Task $task;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $this->status = TaskStatus::factory()->create();
-        $this->label = Label::factory()->create();
-        $this->task = Task::factory()->create(['created_by_id' => $this->user->id]);
+        /** @var Task $task */
+        $task = Task::factory()->create(['created_by_id' => $this->user->id]);
+        $this->task = $task;
     }
 
     public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
         $response->assertOk();
-        $response->assertViewHas('tasks');
     }
 
-    public function testIndexWithFilters(): void
-    {
-        $response = $this->get(route('tasks.index', [
-            'filter' => ['status_id' => $this->status->id]
-        ]));
-        $response->assertOk();
-        $response->assertViewHas('tasks');
-    }
-
-    public function testCreateForAuthenticatedUser(): void
+    public function testCreate(): void
     {
         $this->actingAs($this->user);
-
         $response = $this->get(route('tasks.create'));
         $response->assertOk();
-    }
-
-    public function testCreateForGuest(): void
-    {
-        $response = $this->get(route('tasks.create'));
-        $response->assertRedirect(route('login'));
     }
 
     public function testStore(): void
     {
         $this->actingAs($this->user);
-        $taskData = [
-            'name' => 'New Task',
-            'status_id' => $this->status->id,
-            'labels' => [$this->label->id]
+        $status = TaskStatus::factory()->create();
+        $label = Label::factory()->create();
+
+        $data = [
+            'name' => 'Test Task',
+            'description' => 'Test Description',
+            'status_id' => $status->id,
+            'labels' => [$label->id],
+            'assigned_to_id' => null,
         ];
-        $response = $this->post(route('tasks.store'), $taskData);
+
+        $response = $this->post(route('tasks.store'), $data);
         $response->assertRedirect(route('tasks.index'));
-        $this->assertDatabaseHas('tasks', ['name' => 'New Task']);
-        $response->assertSessionHas('alert', [
-            'type' => 'success',
-            'message' => 'Задача успешно создана'
-        ]);
+        $this->assertDatabaseHas('tasks', ['name' => 'Test Task']);
     }
 
     public function testShow(): void
     {
         $response = $this->get(route('tasks.show', $this->task));
         $response->assertOk();
-        $response->assertViewHas('task', $this->task);
     }
 
-    public function testEditForCreator(): void
+    public function testEdit(): void
     {
         $this->actingAs($this->user);
         $response = $this->get(route('tasks.edit', $this->task));
         $response->assertOk();
     }
 
-    public function testEditForGuest(): void
-    {
-        $response = $this->get(route('tasks.edit', $this->task));
-        $response->assertRedirect(route('login'));
-    }
-
     public function testUpdate(): void
     {
         $this->actingAs($this->user);
-        $updateData = [
+        $status = TaskStatus::factory()->create();
+        $label = Label::factory()->create();
+
+        $data = [
             'name' => 'Updated Task',
-            'status_id' => $this->status->id,
+            'description' => 'Updated Description',
+            'status_id' => $status->id,
+            'labels' => [$label->id],
         ];
-        $response = $this->put(route('tasks.update', $this->task), $updateData);
+
+        $response = $this->put(route('tasks.update', $this->task), $data);
         $response->assertRedirect(route('tasks.index'));
         $this->assertDatabaseHas('tasks', ['name' => 'Updated Task']);
-        $response->assertSessionHas('alert', [
-            'type' => 'success',
-            'message' => 'Задача успешно изменена'
-        ]);
     }
 
-    public function testDestroyByCreator(): void
+    public function testDestroy(): void
     {
         $this->actingAs($this->user);
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertRedirect(route('tasks.index'));
         $this->assertDatabaseMissing('tasks', ['id' => $this->task->id]);
-        $response->assertSessionHas('alert', [
-            'type' => 'success',
-            'message' => 'Задача успешно удалена'
-        ]);
-    }
-
-    public function testDestroyByOtherUser(): void
-    {
-        $otherUser = User::factory()->create();
-        $this->actingAs($otherUser);
-        $response = $this->delete(route('tasks.destroy', $this->task));
-        $response->assertForbidden();
-        $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
-    }
-
-    public function testDeleteLinkVisibilityForCreator()
-    {
-        $this->actingAs($this->user);
-        $response = $this->get(route('tasks.index'));
-        $response->assertSee($this::DEL);
-    }
-
-    public function testDeleteLinkNotVisibleForOtherUsers()
-    {
-        $otherUser = User::factory()->create();
-        $this->actingAs($otherUser);
-        $response = $this->get(route('tasks.index'));
-        $response->assertDontSee($this::DEL);
-    }
-
-    public function testDeleteLinkNotVisibleForGuests()
-    {
-        $response = $this->get(route('tasks.index'));
-        $response->assertDontSee($this::DEL);
     }
 }

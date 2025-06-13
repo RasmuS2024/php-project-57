@@ -13,6 +13,6 @@ class Label extends Model
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class, 'label_task');
+        return $this->belongsToMany(Task::class, 'label_task', 'label_id', 'task_id');
     }
 }

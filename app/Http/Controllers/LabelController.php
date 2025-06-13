@@ -31,10 +31,8 @@ class LabelController extends Controller
         ]);
 
         Label::create($request->all());
-        return redirect()->route('labels.index')->with('alert', [
-                                    'type' => 'success',
-                                    'message' => 'Метка успешно создана'
-                                ]);
+        flash('Метка успешно создана')->success();
+        return redirect()->route('labels.index');
     }
 
     public function show()
@@ -59,36 +57,27 @@ class LabelController extends Controller
         ]);
 
         $label->update($request->all());
-        return redirect()->route('labels.index')->with('alert', [
-                                    'type' => 'success',
-                                    'message' => 'Метка успешно изменена'
-                                ]);
+        flash('Метка успешно изменена')->success();
+        return redirect()->route('labels.index');
     }
 
     public function destroy(Label $label)
     {
         if ($label->tasks()->exists()) {
-            return redirect()->route('labels.index')
-                ->with('alert', [
-                    'type' => 'danger',
-                    'message' => 'Не удалось удалить метку'
-                ]);
+            flash('Не удалось удалить метку: метка связана с задачами')->error();
+            return redirect()->route('labels.index');
         }
+
         try {
             $label->delete();
-            return redirect()->route('labels.index')
-                             ->with('alert', [
-                                    'type' => 'success',
-                                    'message' => 'Метка успешно удалена'
-                                ]);
+            flash('Метка успешно удалена')->success();
+            return redirect()->route('labels.index');
         } catch (QueryException $e) {
             if ($e->getCode() === 23000) {
-                return redirect()->route('labels.index')
-                    ->with('alert', [
-                        'type' => 'danger',
-                        'message' => 'При удалении метки произошла ошибка: ' . $e->getMessage()
-                    ]);
+                flash('При удалении метки произошла ошибка: ' . $e->getMessage())->error();
+                return redirect()->route('labels.index');
             }
+            throw $e;
         }
     }
 }

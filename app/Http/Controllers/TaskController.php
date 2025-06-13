@@ -13,8 +13,8 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::with(['status', 'creator', 'assignee'])
-        ->filter(request()->only('filter'))
-        ->paginate(15);
+            ->filter(request()->only('filter'))
+            ->paginate(15);
 
         return view('tasks.index', [
             'tasks' => $tasks,
@@ -42,9 +42,9 @@ class TaskController extends Controller
             'labels' => 'nullable|array',
             'labels.*' => 'exists:labels,id'
         ], [
-                'name.unique' => trans('validation.custom.name.unique', [
-                    'entity' => 'Задача'
-                ])
+            'name.unique' => trans('validation.custom.name.unique', [
+                'entity' => 'Задача'
+            ])
         ]);
 
         $task = Task::create([
@@ -59,10 +59,8 @@ class TaskController extends Controller
             $task->labels()->sync($validated['labels']);
         }
 
-        return redirect()->route('tasks.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'Задача успешно создана'
-        ]);
+        flash('Задача успешно создана')->success();
+        return redirect()->route('tasks.index');
     }
 
     public function show(Task $task)
@@ -94,19 +92,15 @@ class TaskController extends Controller
 
         $task->update($validated);
         $task->labels()->sync($request->labels ?? []);
-        return redirect()->route('tasks.index')
-            ->with('alert', [
-                'type' => 'success',
-                'message' => 'Задача успешно изменена'
-            ]);
+
+        flash('Задача успешно изменена')->success();
+        return redirect()->route('tasks.index');
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect()->route('tasks.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'Задача успешно удалена'
-        ]);
+        flash('Задача успешно удалена')->success();
+        return redirect()->route('tasks.index');
     }
 }

@@ -21,7 +21,7 @@ class ProfileUpdateRequest extends FormRequest
                 'string',
                 'min:1',
                 'max:255',
-                function ($attribute, $value, $fail) {
+                function ($value, $fail) {
                     if (trim($value) === '') {
                         $fail('Имя не может состоять только из пробелов');
                     }

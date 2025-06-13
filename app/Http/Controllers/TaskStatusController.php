@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Models\TaskStatus;
 use Illuminate\Validation\Rule;
-use Illuminate\Routing\Controller;
 
 class TaskStatusController extends Controller
 {
@@ -35,11 +34,10 @@ class TaskStatusController extends Controller
                 'entity' => 'Статус'
             ])
         ]);
+
         TaskStatus::create($request->all());
-        return redirect()->route('task_statuses.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'Статус успешно создан'
-        ]);
+        flash('Статус успешно создан')->success();
+        return redirect()->route('task_statuses.index');
     }
 
     public function edit(TaskStatus $taskStatus)
@@ -58,31 +56,23 @@ class TaskStatusController extends Controller
         ]);
 
         $taskStatus->update($request->all());
-
-        return redirect()->route('task_statuses.index')->with('alert', [
-            'type' => 'success',
-            'message' => 'Статус успешно изменён'
-        ]);
+        flash('Статус успешно изменён')->success();
+        return redirect()->route('task_statuses.index');
     }
 
     public function destroy(TaskStatus $taskStatus)
     {
         try {
             $taskStatus->delete();
-            return redirect()->route('task_statuses.index')
-                             ->with('alert', [
-                                    'type' => 'success',
-                                    'message' => 'Статус успешно удалён'
-                                ]);
+            flash('Статус успешно удалён')->success();
+            return redirect()->route('task_statuses.index');
         } catch (QueryException $e) {
             if ($e->getCode() === 23000) {
-                return redirect()->back()
-                                 ->with('alert', [
-                                    'type' => 'danger',
-                                    'message' => 'Не удалось удалить статус'
-                                ]);
+                flash('Не удалось удалить статус')->error();
+            } else {
+                flash('Произошла ошибка при удалении')->error();
             }
-            return redirect()->back()->with('error', 'Произошла ошибка при удалении');
+            return redirect()->back();
         }
     }
 }
