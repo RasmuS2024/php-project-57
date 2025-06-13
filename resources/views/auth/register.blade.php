@@ -20,7 +20,7 @@
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Имя')" />
-            <x-text-input id="name" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
         </div>
 
         <!-- Email Address -->

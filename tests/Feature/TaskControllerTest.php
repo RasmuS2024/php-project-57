@@ -17,6 +17,7 @@ class TaskControllerTest extends TestCase
     private $status;
     private $label;
     private $task;
+    private const DEL= 'Удалить';
 
     protected function setUp(): void
     {
@@ -135,7 +136,7 @@ class TaskControllerTest extends TestCase
     {
         $this->actingAs($this->user);
         $response = $this->get(route('tasks.index'));
-        $response->assertSee('Удалить');
+        $response->assertSee($this::DEL);
     }
 
     public function testDeleteLinkNotVisibleForOtherUsers()
@@ -143,12 +144,12 @@ class TaskControllerTest extends TestCase
         $otherUser = User::factory()->create();
         $this->actingAs($otherUser);
         $response = $this->get(route('tasks.index'));
-        $response->assertDontSee('Удалить');
+        $response->assertDontSee($this::DEL);
     }
 
     public function testDeleteLinkNotVisibleForGuests()
     {
         $response = $this->get(route('tasks.index'));
-        $response->assertDontSee('Удалить');
+        $response->assertDontSee($this::DEL);
     }
 }
