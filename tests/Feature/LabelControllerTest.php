@@ -38,8 +38,8 @@ class LabelControllerTest extends ResourceControllerTestCase
         $task = Task::factory()->create();
         $task->labels()->attach($this->model);
 
-        $destroyRoute = route(sprintf('%s.destroy', $this->routePrefix), $this->model);
-        $indexRoute = route(sprintf('%s.index', $this->routePrefix));
+        $destroyRoute = route("{$this->routePrefix}.destroy", $this->model);
+        $indexRoute = route("{$this->routePrefix}.index");
 
         $response = $this->delete($destroyRoute);
 
