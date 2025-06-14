@@ -13,7 +13,6 @@
                 ->class('rounded border-gray-300 w-1/3')
                 ->classIf($errors->has('name'), 'border-red-500')
                 ->attribute('autocomplete', 'off')
-                ->required()
             }}
             @error('name')
                 <div class="text-rose-600">{{ $message }}</div>

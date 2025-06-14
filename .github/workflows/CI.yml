@@ -39,7 +39,8 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
 # if Automatic Analysis is enabled, then do not include the following lines:   
-# если автоматический анализ включен, то следующие строки не включать: ('это приводит к ошибке при выполнении Action на GitHub!')      
+# если автоматический анализ включен, то следующие строки не включать:
+# ('это приводит к ошибке при выполнении Action на GitHub!')      
 #      - name: SonarQube Scan
 #        uses: SonarSource/sonarqube-scan-action@v4
 #        env:
