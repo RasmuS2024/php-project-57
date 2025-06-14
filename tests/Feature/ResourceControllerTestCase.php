@@ -24,6 +24,7 @@ abstract class ResourceControllerTestCase extends TestCase
     protected $model;
     protected $routePrefix;
     protected const INDEX_ROUTE = 'index';
+    protected const FORMAT = '%s.%s';
 
     abstract protected function modelClass(): string;
     abstract protected function routePrefix(): string;
@@ -38,7 +39,7 @@ abstract class ResourceControllerTestCase extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->get(route(sprintf('%s.%s', $this->routePrefix, self::INDEX_ROUTE)));
+        $response = $this->get(route(sprintf(self::FORMAT, $this->routePrefix, self::INDEX_ROUTE)));
         $response->assertOk();
     }
 
@@ -52,7 +53,7 @@ abstract class ResourceControllerTestCase extends TestCase
     {
         $data = ['name' => sprintf('New %s', class_basename($this->model))];
         $response = $this->post(route(sprintf('%s.store', $this->routePrefix)), $data);
-        $response->assertRedirect(route(sprintf('%s.%s', $this->routePrefix, self::INDEX_ROUTE)));
+        $response->assertRedirect(route(sprintf(self::FORMAT, $this->routePrefix, self::INDEX_ROUTE)));
         $this->assertDatabaseHas($this->model->getTable(), $data);
     }
 
@@ -66,14 +67,14 @@ abstract class ResourceControllerTestCase extends TestCase
     {
         $data = ['name' => sprintf('Updated %s', class_basename($this->model))];
         $response = $this->put(route(sprintf('%s.update', $this->routePrefix), $this->model), $data);
-        $response->assertRedirect(route(sprintf('%s.%s', $this->routePrefix, self::INDEX_ROUTE)));
+        $response->assertRedirect(route(sprintf(self::FORMAT, $this->routePrefix, self::INDEX_ROUTE)));
         $this->assertDatabaseHas($this->model->getTable(), $data);
     }
 
     public function testDestroy(): void
     {
         $response = $this->delete(route(sprintf('%s.destroy', $this->routePrefix), $this->model));
-        $response->assertRedirect(route(sprintf('%s.%s', $this->routePrefix, self::INDEX_ROUTE)));
+        $response->assertRedirect(route(sprintf(self::FORMAT, $this->routePrefix, self::INDEX_ROUTE)));
         $this->assertDatabaseMissing($this->model->getTable(), ['id' => $this->model->id]);
     }
 }
