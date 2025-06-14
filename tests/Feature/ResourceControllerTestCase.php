@@ -3,10 +3,11 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
 /**
- * @abstract
+ * @template TModel of \Illuminate\Database\Eloquent\Model
  */
 abstract class ResourceControllerTestCase extends TestCase
 {
@@ -14,11 +15,11 @@ abstract class ResourceControllerTestCase extends TestCase
 
     protected $model;
     protected $routePrefix;
-    protected $factory;
-    protected const IND = '.index';
+    protected const INDEX_ROUTE = 'index';
 
     abstract protected function modelClass(): string;
     abstract protected function routePrefix(): string;
+    abstract protected function controllerClass(): string;
 
     protected function setUp(): void
     {
@@ -29,7 +30,7 @@ abstract class ResourceControllerTestCase extends TestCase
 
     public function testIndex(): void
     {
-        $response = $this->get(route($this->routePrefix . self::IND));
+        $response = $this->get(route($this->routePrefix . '.' . self::INDEX_ROUTE));
         $response->assertOk();
     }
 
@@ -43,7 +44,7 @@ abstract class ResourceControllerTestCase extends TestCase
     {
         $data = ['name' => 'New ' . class_basename($this->model)];
         $response = $this->post(route($this->routePrefix . '.store'), $data);
-        $response->assertRedirect(route($this->routePrefix . self::IND));
+        $response->assertRedirect(route($this->routePrefix . '.' . self::INDEX_ROUTE));
         $this->assertDatabaseHas($this->model->getTable(), $data);
     }
 
@@ -57,14 +58,14 @@ abstract class ResourceControllerTestCase extends TestCase
     {
         $data = ['name' => 'Updated ' . class_basename($this->model)];
         $response = $this->put(route($this->routePrefix . '.update', $this->model), $data);
-        $response->assertRedirect(route($this->routePrefix . self::IND));
+        $response->assertRedirect(route($this->routePrefix . '.' . self::INDEX_ROUTE));
         $this->assertDatabaseHas($this->model->getTable(), $data);
     }
 
     public function testDestroy(): void
     {
         $response = $this->delete(route($this->routePrefix . '.destroy', $this->model));
-        $response->assertRedirect(route($this->routePrefix . self::IND));
+        $response->assertRedirect(route($this->routePrefix . '.' . self::INDEX_ROUTE));
         $this->assertDatabaseMissing($this->model->getTable(), ['id' => $this->model->id]);
     }
 }

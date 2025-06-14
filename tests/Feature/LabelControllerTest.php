@@ -2,9 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\LabelController;
 use App\Models\Label;
 use App\Models\Task;
+use PHPUnit\Framework\Attributes\CoversClass;
 
+#[CoversClass(LabelController::class)]
 class LabelControllerTest extends ResourceControllerTestCase
 {
     protected function modelClass(): string
@@ -15,6 +18,11 @@ class LabelControllerTest extends ResourceControllerTestCase
     protected function routePrefix(): string
     {
         return 'labels';
+    }
+
+    protected function controllerClass(): string
+    {
+        return LabelController::class;
     }
 
     public function testDestroyWithAssociatedTask(): void

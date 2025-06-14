@@ -11,3 +11,6 @@ validate:
 lint:
 	composer exec -v phpcs .
 	composer exec -v phpstan analyse -- -c phpstan.neon --ansi
+
+test:
+	php artisan test

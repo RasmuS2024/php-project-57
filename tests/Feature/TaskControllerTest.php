@@ -2,13 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\TaskController;
 use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
+#[CoversClass(TaskController::class)]
 class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -41,6 +44,7 @@ class TaskControllerTest extends TestCase
     public function testStore(): void
     {
         $this->actingAs($this->user);
+
         $status = TaskStatus::factory()->create();
         $label = Label::factory()->create();
 
@@ -54,7 +58,7 @@ class TaskControllerTest extends TestCase
 
         $response = $this->post(route('tasks.store'), $data);
         $response->assertRedirect(route('tasks.index'));
-        $this->assertDatabaseHas('tasks', ['name' => 'Test Task']);
+        $this->assertDatabaseHas('tasks', ['name' => $data['name']]);
     }
 
     public function testShow(): void
@@ -73,6 +77,7 @@ class TaskControllerTest extends TestCase
     public function testUpdate(): void
     {
         $this->actingAs($this->user);
+
         $status = TaskStatus::factory()->create();
         $label = Label::factory()->create();
 
@@ -85,7 +90,7 @@ class TaskControllerTest extends TestCase
 
         $response = $this->put(route('tasks.update', $this->task), $data);
         $response->assertRedirect(route('tasks.index'));
-        $this->assertDatabaseHas('tasks', ['name' => 'Updated Task']);
+        $this->assertDatabaseHas('tasks', ['name' => $data['name']]);
     }
 
     public function testDestroy(): void
