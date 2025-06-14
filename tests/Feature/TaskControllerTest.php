@@ -5,13 +5,19 @@ namespace Tests\Feature;
 use App\Http\Controllers\TaskController;
 use App\Models\Label;
 use App\Models\Task;
-use App\Models\TaskStatus;
 use App\Models\User;
+use App\Models\TaskStatus;
+use App\Providers\AppServiceProvider;
+use PHPUnit\Framework\Attributes\UsesClass;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
 #[CoversClass(TaskController::class)]
+#[UsesClass(AppServiceProvider::class)]
+#[UsesClass(Label::class)]
+#[UsesClass(Task::class)]
+#[UsesClass(User::class)]
 class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;

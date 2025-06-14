@@ -4,10 +4,15 @@ namespace Tests\Feature;
 
 use App\Models\Task;
 use App\Models\TaskStatus;
+use App\Models\User;
 use App\Http\Controllers\TaskStatusController;
+use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 
 #[CoversClass(TaskStatusController::class)]
+#[UsesClass(AppServiceProvider::class)]
+#[UsesClass(User::class)]
 class TaskStatusControllerTest extends ResourceControllerTestCase
 {
     protected function modelClass(): string

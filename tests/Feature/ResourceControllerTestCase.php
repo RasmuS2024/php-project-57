@@ -3,12 +3,20 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\Attributes\CoversClass;
+use App\Models\Label;
+use App\Models\Task;
+use App\Models\User;
+use App\Providers\AppServiceProvider;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\UsesClass;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
  */
+#[UsesClass(AppServiceProvider::class)]
+#[UsesClass(Label::class)]
+#[UsesClass(Task::class)]
+#[UsesClass(User::class)]
 abstract class ResourceControllerTestCase extends TestCase
 {
     use RefreshDatabase;
