@@ -21,10 +21,10 @@ jobs:
           php-version: '8.2'
           coverage: xdebug
           
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: Install Node.js (v18 LTS)
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
           
       - name: Install dependencies with composer
         run: composer install --no-ansi --no-interaction --no-progress
@@ -32,8 +32,8 @@ jobs:
       - name: Install npm dependencies
         run: npm install
       
-      - name: Build assets
-        run: npm run build
+      - name: Build assets (with CI=false)
+        run: CI=false npm run build  # Важно!
           
       - name: Run tests with phpunit/phpunit
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
