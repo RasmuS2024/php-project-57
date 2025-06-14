@@ -9,7 +9,10 @@
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script
+          src="https://cdn.example.com/v5.3.6/script.js"
+          integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+        ></script>
         <script>
           $(document).ready(function() {
             $('div.alert').not('.alert-important').delay(3000).fadeOut(350);

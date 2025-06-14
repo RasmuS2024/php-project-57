@@ -7,11 +7,13 @@
 /storage/*.key
 /storage/pail
 /vendor
+/build
 .env
 .env.backup
 .env.production
 .phpactor.json
 .phpunit.result.cache
+.phpunit.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
