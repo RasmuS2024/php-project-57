@@ -31,12 +31,12 @@ class TaskStatusController extends Controller
             'name' => 'required|unique:task_statuses|max:255',
         ], [
             'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => 'Статус'
+                'entity' => __('status.entity')
             ])
         ]);
 
         TaskStatus::create($request->all());
-        flash('Статус успешно создан')->success();
+        flash(__('status.flash.created'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -56,7 +56,7 @@ class TaskStatusController extends Controller
         ]);
 
         $taskStatus->update($request->all());
-        flash('Статус успешно изменён')->success();
+        flash(__('status.flash.updated'))->success();
         return redirect()->route('task_statuses.index');
     }
 
@@ -64,13 +64,13 @@ class TaskStatusController extends Controller
     {
         try {
             $taskStatus->delete();
-            flash('Статус успешно удалён')->success();
+            flash(__('status.flash.deleted'))->success();
             return redirect()->route('task_statuses.index');
         } catch (QueryException $e) {
             if ($e->getCode() === 23000) {
-                flash('Не удалось удалить статус')->error();
+                flash(__('status.flash.delete_error'))->error();
             } else {
-                flash('Произошла ошибка при удалении')->error();
+                flash(__('status.flash.delete_exception'))->error();
             }
             return redirect()->back();
         }

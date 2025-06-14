@@ -23,8 +23,3 @@ Route::resource('tasks', TaskController::class);
 Route::resource('task_statuses', TaskStatusController::class);
 
 Route::resource('labels', LabelController::class);
-
-Route::get('/test-rollbar', function () {
-    \Illuminate\Support\Facades\Log::debug('Test debug message from route');
-    return 'Rollbar test complete! Check your Rollbar dashboard.';
-});

@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">Задачи</h1>
+<h1 class="mb-5">@lang('task.index.title')</h1>
 
 <div class="w-full flex items-center">
     {{ html()->form('GET', route('tasks.index'))->class('flex')->open() }}
         <div class="flex">
-            {{ html()->select('filter[status_id]', collect(['' => 'Статус'])->union($statuses))
+            {{ html()->select('filter[status_id]', collect(['' => __('task.index.filters.status')])->union($statuses))
                 ->class('rounded border-gray-300')
                 ->value(request('filter.status_id'))
                 ->id('filter_status_id')
             }}
             
-            {{ html()->select('filter[created_by_id]', collect(['' => 'Автор'])->union($users))
+            {{ html()->select('filter[created_by_id]', collect(['' => __('task.index.filters.author')])->union($users))
                 ->class('rounded border-gray-300')
                 ->value(request('filter.created_by_id'))
                 ->id('filter_created_by_id')
             }}
             
-            {{ html()->select('filter[assigned_to_id]', collect(['' => 'Исполнитель'])->union($users))
+            {{ html()->select('filter[assigned_to_id]', collect(['' => __('task.index.filters.assignee')])->union($users))
                 ->class('rounded border-gray-300')
                 ->value(request('filter.assigned_to_id'))
                 ->id('filter_assigned_to_id')
             }}
             
-            {{ html()->button('Применить')
+            {{ html()->button(__('task.index.buttons.apply'))
                 ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2')
                 ->type('submit')
             }}
@@ -33,7 +33,7 @@
     
     @auth
         <div class="ml-auto">
-            {{ html()->a(route('tasks.create'), 'Создать задачу')
+            {{ html()->a(route('tasks.create'), __('task.index.buttons.create'))
                 ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2')
             }}
         </div>
@@ -43,14 +43,14 @@
 <table class="mt-4 w-full">
     <thead class="border-b-2 border-solid border-black text-left">
         <tr>
-            <th class="p-2">ID</th>
-            <th class="p-2">Статус</th>
-            <th class="p-2">Имя</th>
-            <th class="p-2">Автор</th>
-            <th class="p-2">Исполнитель</th>
-            <th class="p-2">Дата создания</th>
+            <th class="p-2">@lang('task.index.columns.id')</th>
+            <th class="p-2">@lang('task.index.columns.status')</th>
+            <th class="p-2">@lang('task.index.columns.name')</th>
+            <th class="p-2">@lang('task.index.columns.author')</th>
+            <th class="p-2">@lang('task.index.columns.assignee')</th>
+            <th class="p-2">@lang('task.index.columns.created_at')</th>
             @auth
-            <th class="p-2">Действия</th>
+            <th class="p-2">@lang('task.index.columns.actions')</th>
             @endauth
         </tr>
     </thead>
@@ -71,10 +71,9 @@
                     <td class="p-2">
                         <div class="flex items-center space-x-4">
                             @if($task->created_by_id === auth()->id())
-                                {{ html()->a('#', 'Удалить')
+                                {{ html()->a('#', __('task.index.buttons.delete'))
                                     ->class('text-red-600 hover:text-red-900')
-                                    // Обновленный обработчик с подтверждением
-                                    ->attribute('onclick', 'event.preventDefault(); if(confirm(\'Вы уверены?\')) { document.getElementById(\'delete-form-'.$task->id.'\').submit() }')
+                                    ->attribute('onclick', 'event.preventDefault(); if(confirm(\''.__('task.index.delete_confirmation').'\')) { document.getElementById(\'delete-form-'.$task->id.'\').submit() }')
                                     ->attribute('dusk', 'delete-link-'.$task->id)
                                 }}
                                 {{ html()->form('DELETE', route('tasks.destroy', $task))
@@ -85,7 +84,7 @@
                                 {{ html()->form()->close() }}
                             @endif
                             &nbsp;
-                            {{ html()->a(route('tasks.edit', $task), 'Изменить')
+                            {{ html()->a(route('tasks.edit', $task), __('task.index.buttons.edit'))
                                 ->class('text-blue-600 hover:text-blue-900')
                                 ->attribute('dusk', 'edit-link-'.$task->id)
                             }}

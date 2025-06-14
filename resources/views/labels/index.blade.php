@@ -1,24 +1,23 @@
-@php use Spatie\Html\Facades\Html; @endphp
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">Метки</h1>
+<h1 class="mb-5">{{ __('label.index_title') }}</h1>
 @auth
     <div>
-        {!! Html::a(route('labels.create'), 'Создать метку')
+        {{ html()->a(route('labels.create'), __('label.create_title'))
             ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded')
-        !!}
+        }}
     </div>
 @endauth
 <table class="mt-4">
     <thead class="border-b-2 border-solid border-black text-left">
         <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Описание</th>
-            <th>Дата создания</th>
+            <th>{{ __('label.fields.id') }}</th>
+            <th>{{ __('label.fields.name') }}</th>
+            <th>{{ __('label.fields.description') }}</th>
+            <th>{{ __('label.fields.created_at') }}</th>
             @auth
-                <th>Действия</th>
+                <th>{{ __('label.actions') }}</th>
             @endauth
         </tr>
     </thead>
@@ -32,9 +31,9 @@
                 @auth
                     <td>
                         <div class="flex items-center space-x-4">
-                            {{ html()->a('#', 'Удалить')
+                            {{ html()->a('#', __('common.delete'))
                                 ->class('text-red-600 hover:text-red-900')
-                                ->attribute('onclick', 'event.preventDefault(); if(confirm(\'Вы уверены?\')) { document.getElementById(\'delete-form-'.$label->id.'\').submit() }')
+                                ->attribute('onclick', 'event.preventDefault(); if(confirm(\''.__('common.delete_confirm').'\')) { document.getElementById(\'delete-form-'.$label->id.'\').submit() }')
                                 ->attribute('dusk', 'delete-link-'.$label->id)
                             }}
                             {{ html()->form('DELETE', route('labels.destroy', $label))
@@ -44,7 +43,7 @@
                             }}
                             {{ html()->form()->close() }}
                             &nbsp;
-                            {{ html()->a(route('labels.edit', $label), 'Изменить')
+                            {{ html()->a(route('labels.edit', $label), __('common.edit'))
                                 ->class('text-blue-600 hover:text-blue-900')
                                 ->attribute('dusk', 'edit-link-'.$label->id)
                             }}

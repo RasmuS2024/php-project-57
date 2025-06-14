@@ -2,17 +2,17 @@
 
 @section('content')
 <h2 class="mb-5 text-2xl font-bold">
-    Просмотр задачи: {{ $task->name }}
+    @lang('task.show.title', ['name' => $task->name])
     {{ html()->a(route('tasks.edit', $task), '&#9881;')->class('inline-block ml-2 text-lg') }}
 </h2>
 
 <div class="space-y-3">
-    <p><span class="font-black">Имя:</span> {{ $task->name }}</p>
-    <p><span class="font-black">Статус:</span> {{ $task->status->name }}</p>
-    <p><span class="font-black">Описание:</span> {{ $task->description ?? '—' }}</p>
+    <p><span class="font-black">@lang('task.show.fields.name'):</span> {{ $task->name }}</p>
+    <p><span class="font-black">@lang('task.show.fields.status'):</span> {{ $task->status->name }}</p>
+    <p><span class="font-black">@lang('task.show.fields.description'):</span> {{ $task->description ?? __('task.show.empty_description') }}</p>
     
     @if($task->labels->isNotEmpty())
-        <p><span class="font-black">Метки:</span></p>
+        <p><span class="font-black">@lang('task.show.fields.labels'):</span></p>
         <div>
             @foreach($task->labels as $label)
                 <div class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full">

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">Создать задачу</h1>
+<h1 class="mb-5">@lang('task.create.title')</h1>
 {{ html()->form('POST', route('tasks.store'))->class('w-50')->open() }}
     <div class="flex flex-col">
         <div>
-            {{ html()->label('Имя', 'name') }}
+            {{ html()->label(__('task.create.fields.name'), 'name') }}
         </div>
         <div class="mt-2">
             {{ html()->text('name')
@@ -20,7 +20,7 @@
         </div>
 
         <div class="mt-2">
-            {{ html()->label('Описание', 'description') }}
+            {{ html()->label(__('task.create.fields.description'), 'description') }}
         </div>
         <div>
             {{ html()->textarea('description')
@@ -34,13 +34,13 @@
         </div>
 
         <div class="mt-2">
-            {{ html()->label('Статус', 'status_id') }}
+            {{ html()->label(__('task.create.fields.status'), 'status_id') }}
         </div>
         <div>
             {{ html()->select('status_id', $statuses->pluck('name', 'id'))
                 ->class('rounded border-gray-300 w-1/3')
                 ->classIf($errors->has('status_id'), 'border-red-500')
-                ->placeholder('-- Выберите статус --')
+                ->placeholder(__('task.create.status_placeholder'))
                 ->value(old('status_id'))
             }}
             @error('status_id')
@@ -49,7 +49,7 @@
         </div>
 
         <div class="mt-2">
-            {{ html()->label('Исполнитель', 'assigned_to_id') }}
+            {{ html()->label(__('task.create.fields.assignee'), 'assigned_to_id') }}
         </div>
         <div>
             {{ html()->select('assigned_to_id', $users->pluck('name', 'id'))
@@ -64,7 +64,7 @@
         </div>
 
         <div class="mt-2">
-            {{ html()->label('Метки', 'labels') }}
+            {{ html()->label(__('task.create.fields.labels'), 'labels') }}
         </div>
         <div>
             {{ html()->multiselect('labels[]', $labels->pluck('name', 'id'))
@@ -78,7 +78,7 @@
         </div>
 
         <div class="mt-2">
-            {{ html()->button('Создать')
+            {{ html()->button(__('task.create.submit'))
                 ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded')
                 ->type('submit')
             }}

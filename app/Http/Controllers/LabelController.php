@@ -26,12 +26,12 @@ class LabelController extends Controller
             'name' => 'required|unique:labels|max:255',
         ], [
             'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => 'Метка'
+                'entity' => __('label.entity')
             ])
         ]);
 
         Label::create($request->all());
-        flash('Метка успешно создана')->success();
+        flash(__('label.flash.created'))->success();
         return redirect()->route('labels.index');
     }
 
@@ -57,24 +57,26 @@ class LabelController extends Controller
         ]);
 
         $label->update($request->all());
-        flash('Метка успешно изменена')->success();
+        flash(__('label.flash.updated'))->success();
         return redirect()->route('labels.index');
     }
 
     public function destroy(Label $label)
     {
         if ($label->tasks()->exists()) {
-            flash('Не удалось удалить метку: метка связана с задачами')->error();
+            flash(__('label.flash.delete_error'))->error();
             return redirect()->route('labels.index');
         }
 
         try {
             $label->delete();
-            flash('Метка успешно удалена')->success();
+            flash(__('label.flash.deleted'))->success();
             return redirect()->route('labels.index');
         } catch (QueryException $e) {
             if ($e->getCode() === 23000) {
-                flash('При удалении метки произошла ошибка: ' . $e->getMessage())->error();
+                flash(__('label.flash.delete_exception', [
+                    'error' => $e->getMessage()
+                ]))->error();
                 return redirect()->route('labels.index');
             }
             throw $e;

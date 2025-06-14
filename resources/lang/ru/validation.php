@@ -19,6 +19,10 @@ return [
         'email' => 'Email',
         'password' => 'Пароль',
         'name' => 'Имя',
+        'description' => 'Описание',
+        'status_id' => 'Статус',
+        'assigned_to_id' => 'Исполнитель',
+        'labels' => 'Метки',
     ],
 
     'required' => 'Это обязательное поле',

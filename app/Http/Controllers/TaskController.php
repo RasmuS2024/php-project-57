@@ -43,7 +43,7 @@ class TaskController extends Controller
             'labels.*' => 'exists:labels,id'
         ], [
             'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => 'Задача'
+                'entity' => __('task.entity')
             ])
         ]);
 
@@ -59,7 +59,7 @@ class TaskController extends Controller
             $task->labels()->sync($validated['labels']);
         }
 
-        flash('Задача успешно создана')->success();
+        flash(__('task.flash.created'))->success();
         return redirect()->route('tasks.index');
     }
 
@@ -93,14 +93,14 @@ class TaskController extends Controller
         $task->update($validated);
         $task->labels()->sync($request->labels ?? []);
 
-        flash('Задача успешно изменена')->success();
+        flash(__('task.flash.updated'))->success();
         return redirect()->route('tasks.index');
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
-        flash('Задача успешно удалена')->success();
+        flash(__('task.flash.deleted'))->success();
         return redirect()->route('tasks.index');
     }
 }

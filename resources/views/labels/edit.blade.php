@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">Изменение метки</h1>
+<h1 class="mb-5">{{ __('label.edit_title') }}</h1>
 {{ html()->modelForm($label, 'PATCH', route('labels.update', $label))->class('flex flex-col')->open() }}
     <div class="flex flex-col">
         <div>
-            {{ html()->label('Имя', 'name') }}
+            {{ html()->label(__('label.fields.name'), 'name') }}
         </div>
         <div class="mt-2">
             {{ html()->text('name')
@@ -18,7 +18,7 @@
             @enderror
         </div>
         <div class="mt-4">
-            {{ html()->label('Описание', 'description') }}
+            {{ html()->label(__('label.fields.description'), 'description') }}
         </div>
         <div class="mt-2">
             {{ html()->textarea('description')
@@ -30,7 +30,7 @@
             @enderror
         </div>
         <div class="mt-4">
-            {{ html()->button('Обновить')
+            {{ html()->button(__('label.update_button'))
                 ->type('submit')
                 ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded')
             }}
