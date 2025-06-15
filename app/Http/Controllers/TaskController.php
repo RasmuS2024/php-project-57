@@ -14,6 +14,7 @@ class TaskController extends Controller
     {
         $tasks = Task::with(['status', 'creator', 'assignee'])
             ->filter(request()->only('filter'))
+            ->orderBy('id')
             ->paginate(15);
 
         return view('tasks.index', [

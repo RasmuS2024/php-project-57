@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Label;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class LabelSeeder extends Seeder
 {
@@ -36,6 +36,8 @@ class LabelSeeder extends Seeder
             ]
         ];
 
-        DB::table('labels')->insert($labels);
+        foreach ($labels as $label) {
+            Label::firstOrCreate($label);
+        }
     }
 }
