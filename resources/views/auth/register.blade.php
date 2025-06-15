@@ -4,7 +4,7 @@
     @if($errors->any())
         <div class="mb-4">
             <div class="font-medium text-red-600">
-                @lang('auth.register.error_header')
+                @lang('auth.common.error_header')
             </div>
             <ul class="mt-3 list-disc list-inside text-sm text-red-600">
                 @foreach($errors->all() as $error)
@@ -19,27 +19,44 @@
 
         <div>
             <x-input-label for="name" :value="__('auth.register.name')" />
-            <x-text-input id="name" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <x-text-input id="name" 
+                         class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" 
+                         type="text" 
+                         name="name" 
+                         :value="old('name')" 
+                         required 
+                         autofocus />
         </div>
 
         <div class="mt-4">
-            <x-input-label for="email" :value="__('auth.register.email')" />
-            <x-text-input id="email" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-label for="email" :value="__('auth.common.email')" />
+            <x-text-input id="email" 
+                         class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full" 
+                         type="email" 
+                         name="email" 
+                         :value="old('email')" 
+                         required 
+                         autocomplete="username" />
         </div>
 
         <div class="mt-4">
-            <x-input-label for="password" :value="__('auth.register.password')" />
-            <x-text-input id="password" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <x-input-label for="password" :value="__('auth.common.password')" />
+            <x-text-input id="password" 
+                         class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full"
+                         type="password"
+                         name="password"
+                         required 
+                         autocomplete="new-password" />
         </div>
 
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('auth.register.confirmation')" />
-            <x-text-input id="password_confirmation" class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <x-input-label for="password_confirmation" :value="__('auth.common.password_confirmation')" />
+            <x-text-input id="password_confirmation" 
+                         class="rounded-md shadow-sm border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block mt-1 w-full"
+                         type="password"
+                         name="password_confirmation" 
+                         required 
+                         autocomplete="new-password" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

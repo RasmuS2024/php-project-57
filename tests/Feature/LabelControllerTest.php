@@ -9,8 +9,6 @@ use App\Models\User;
 use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
-use Illuminate\Database\QueryException;
-use Mockery;
 
 #[CoversClass(LabelController::class)]
 #[UsesClass(AppServiceProvider::class)]
