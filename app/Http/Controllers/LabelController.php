@@ -71,15 +71,14 @@ class LabelController extends Controller
         try {
             $label->delete();
             flash(__('label.flash.deleted'))->success();
-            return redirect()->route('labels.index');
         } catch (QueryException $e) {
             if ($e->getCode() === 23000) {
-                flash(__('label.flash.delete_exception', [
-                    'error' => $e->getMessage()
-                ]))->error();
-                return redirect()->route('labels.index');
+                flash(__('label.flash.delete_exception', ['error' => $e->getMessage()]))->error();
+            } else {
+                throw $e;
             }
-            throw $e;
         }
+
+        return redirect()->route('labels.index');
     }
 }

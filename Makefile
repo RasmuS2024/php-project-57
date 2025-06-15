@@ -13,4 +13,4 @@ lint:
 	composer exec -v phpstan analyse -- -c phpstan.neon --ansi
 
 test:
-	php artisan test
+	php artisan test --coverage-clover reports/coverage.xml
