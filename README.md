@@ -22,8 +22,13 @@ https://php-project-57-42yp.onrender.com
 ### Setup
 ```bash
 git clone https://github.com/RasmuS2024/php-project-57.git
-cd php-project-9
+cd php-project-57
 make install
+npm init -y
+npm install
+npm run build
+php artisan migrate
+php artisan db:seed
 ```
 
 ### Start and use
@@ -32,5 +37,5 @@ You must define the DATABASE_URL environment variable according to the parameter
 export DATABASE_URL='postgresql://user:password@localhost:5432/db_name'
 make start
 ```
-At http://localhost:8000 the Page Analyzer will start.
+At http://localhost:8000 the Task Manager will start.
 The IP address and port are configured in the Makefile

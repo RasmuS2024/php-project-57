@@ -12,6 +12,7 @@ return [
         ],
         'submit' => 'Создать',
         'status_placeholder' => 'Выберите статус',
+        'assignee_placeholder' => 'Выберите исполнителя',
     ],
     'edit' => [
         'title' => 'Изменение задачи',

@@ -55,7 +55,7 @@
             {{ html()->select('assigned_to_id', $users->pluck('name', 'id'))
                 ->class('rounded border-gray-300 w-1/3')
                 ->classIf($errors->has('assigned_to_id'), 'border-red-500')
-                ->placeholder('')
+                ->placeholder(__('task.create.assignee_placeholder'))
                 ->value(old('assigned_to_id'))
             }}
             @error('assigned_to_id')

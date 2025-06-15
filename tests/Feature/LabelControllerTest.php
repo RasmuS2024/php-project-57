@@ -10,6 +10,7 @@ use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Illuminate\Database\QueryException;
+use Mockery;
 
 #[CoversClass(LabelController::class)]
 #[UsesClass(AppServiceProvider::class)]
@@ -18,6 +19,15 @@ use Illuminate\Database\QueryException;
 #[UsesClass(User::class)]
 class LabelControllerTest extends ResourceControllerTestCase
 {
+    protected User $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create();
+        $this->actingAs($this->user);
+    }
+
     protected function modelClass(): string
     {
         return Label::class;
@@ -47,4 +57,5 @@ class LabelControllerTest extends ResourceControllerTestCase
         $response->assertRedirect($indexRoute);
         $this->assertDatabaseHas($this->model->getTable(), ['id' => $this->model->id]);
     }
+
 }
