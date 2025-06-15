@@ -20,6 +20,6 @@ RUN composer install \
     && npm ci --ignore-scripts\
     && npm run build
 
-COPY scripts/docker-entrypoint.sh /usr/local/bin/
+COPY /app/scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 CMD ["/usr/local/bin/docker-entrypoint.sh"]
