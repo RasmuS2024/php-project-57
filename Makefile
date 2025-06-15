@@ -1,11 +1,10 @@
-	
+PORT ?= 8000
+
 update:
 	composer update
 
 install:
 	composer install
-	php artisan migrate
-	php artisan db:seed
 
 validate:
 	composer validate

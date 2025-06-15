@@ -57,5 +57,4 @@ class LabelControllerTest extends ResourceControllerTestCase
         $response->assertRedirect($indexRoute);
         $this->assertDatabaseHas($this->model->getTable(), ['id' => $this->model->id]);
     }
-
 }
