@@ -10,10 +10,10 @@ class TaskStatusSeeder extends Seeder
     public function run()
     {
         $statuses = [
-            ['name' => 'новая'],
-            ['name' => 'завершена'],
-            ['name' => 'выполняется'],
-            ['name' => 'в архиве'],
+            ['name' => 'новый'],
+            ['name' => 'в работе'],
+            ['name' => 'на тестировании'],
+            ['name' => 'завершен'],
         ];
 
         foreach ($statuses as $status) {

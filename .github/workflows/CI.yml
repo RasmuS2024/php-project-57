@@ -41,7 +41,7 @@ jobs:
 # if Automatic Analysis is enabled, then do not include the following lines:   
 # если автоматический анализ включен, то следующие строки не включать:
 # ('это приводит к ошибке при выполнении Action на GitHub!')      
-#      - name: SonarQube Scan
-#        uses: SonarSource/sonarqube-scan-action@v4
-#        env:
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
