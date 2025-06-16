@@ -14,6 +14,31 @@ jobs:
         with:
           fetch-depth: 0
           
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer
+          extensions: mbstring, xml, intl, pdo, pdo_mysql, sqlite
+          coverage: xdebug
+          
+      - name: Install Composer dependencies
+        run: |
+          composer install --prefer-dist --no-progress
+          # Установка инструментов анализа кода
+          composer require --dev squizlabs/php_codesniffer phpstan/phpstan
+          
+      - name: Create reports directory
+        run: mkdir -p reports
+      
+      - name: Setup environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          touch database/database.sqlite
+          echo "DB_CONNECTION=sqlite" >> .env
+          echo "DB_DATABASE=$(pwd)/database/database.sqlite" >> .env
+          
       - name: Run Linting
         run: make lint
 
@@ -24,4 +49,3 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
