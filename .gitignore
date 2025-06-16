@@ -15,8 +15,8 @@ auth.json
 /node_modules/.vite
 /vendor
 /bootstrap/cache/*
-/build
-/reports
+/build/
+/reports/
 /reports/coverage-html
 
 /public/build

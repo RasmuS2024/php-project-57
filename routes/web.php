@@ -18,8 +18,26 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
-Route::resource('tasks', TaskController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('tasks', TaskController::class)->only([
+        'create', 'edit', 'store', 'update', 'destroy'
+    ]);
+});
+
+Route::resource('tasks', TaskController::class)->only(['index', 'show']);
+
+Route::middleware('auth')->group(function () {
+    Route::resource('task_statuses', TaskStatusController::class)->only([
+        'create', 'edit', 'store', 'update', 'destroy'
+    ]);
+});
 
 Route::resource('task_statuses', TaskStatusController::class);
+
+Route::middleware('auth')->group(function () {
+    Route::resource('labels', TaskStatusController::class)->only([
+        'create', 'edit', 'store', 'update', 'destroy'
+    ]);
+});
 
 Route::resource('labels', LabelController::class);
