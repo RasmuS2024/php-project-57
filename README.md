@@ -1,4 +1,9 @@
 # Task Manager (Laravel)
+An educational project at the Hexlet School of Programming.
+Task Manager is a task management system similar to http://www.redmine.org /. It allows you to set tasks, assign performers, and change their statuses. Registration and authentication are required to work with the system.
+
+Учебный проект в школе программирования Хекслет.
+Task Manager – система управления задачами, подобная http://www.redmine.org/. Она позволяет ставить задачи, назначать исполнителей и менять их статусы. Для работы с системой требуется регистрация и аутентификация.
 
 ### Project status
 
