@@ -1,25 +1,34 @@
-FROM php:8.2-cli
+FROM php:8.2.28-alpine
 
-RUN set -e; \
-    apt-get update \
-    && apt-get --no-install-recommends install -y libpq-dev libzip-dev \
-    && docker-php-ext-install pdo pdo_pgsql zip \
-    && curl --proto "=https" --tlsv1.2 -sSf -L https://deb.nodesource.com/setup_22.14.0 | bash \
-    && apt-get --no-install-recommends install -y nodejs \
-    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && php -r "unlink('composer-setup.php');" \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    postgresql-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    nodejs \
+    npm \
+    curl \
+    bash
 
+RUN docker-php-ext-install pdo_pgsql zip
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN mkdir -p /app
 WORKDIR /app
+
+COPY composer.json composer.lock ./
+RUN composer install --no-autoloader --no-scripts --no-dev
+
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
 
 COPY . .
 
-RUN composer install --no-interaction --optimize-autoloader --no-dev\
-    && npm ci --ignore-scripts\
-    && npm run build
+RUN composer dump-autoload --optimize && \
+    npm run build
 
-COPY /app/scripts/docker-entrypoint.sh /usr/local/bin/
+COPY ./app/scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-CMD ["/usr/local/bin/docker-entrypoint.sh"]
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
