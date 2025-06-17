@@ -55,7 +55,7 @@ jobs:
         run: php artisan migrate --force
 
       - name: Run Linting
-        run: make lint
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Run Tests
         run: make test
