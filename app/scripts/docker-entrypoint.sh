@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ecd
+set -e
 
 php artisan config:clear
 php artisan migrate --force

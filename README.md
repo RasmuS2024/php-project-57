@@ -9,6 +9,7 @@ Task Manager – система управления задачами, подо�
 
 [![Hexlet tests and linter](https://github.com/RasmuS2024/php-project-57/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/RasmuS2024/php-project-57/actions)
 [![SonarQube Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=RasmuS2024_php-project-57&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RasmuS2024_php-project-57)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=RasmuS2024_php-project-57&metric=coverage)](https://sonarcloud.io/summary/new_code?id=RasmuS2024_php-project-57)
 
 ### Live demo
 🌐 [View on Render.com](https://php-project-57-42yp.onrender.com)

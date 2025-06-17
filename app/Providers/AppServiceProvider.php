@@ -26,11 +26,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
-/*
-        Authenticate::redirectUsing(function ($request) {
-            abort(403);
-        });
-*/
+
         ResetPassword::createUrlUsing(function (User $user, string $token) {
             return url(route('password.reset', [
                 'token' => $token,
