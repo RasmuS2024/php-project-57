@@ -44,15 +44,6 @@
         </report>
     </coverage>
 
-    <filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
-        <file>app/Http/Controllers/*.php</file>
-        <exclude>
-            <directory>app/Http/Controllers/*</directory>
-        </exclude>
-    </whitelist>
-    </filter>
-
     <logging>
         <junit outputFile="reports/junit.xml"/>
     </logging>
