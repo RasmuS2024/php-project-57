@@ -55,10 +55,13 @@ jobs:
         run: php artisan migrate --force
 
       - name: Run Linting
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: make lint
 
       - name: Run Tests
-        run: make test
+        run: |
+          vendor/bin/phpunit \
+            --coverage-clover=coverage.xml \
+            --whitelist 'app/Http/Controllers'
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
