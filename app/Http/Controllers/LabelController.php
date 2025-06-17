@@ -35,11 +35,6 @@ class LabelController extends Controller
         return redirect()->route('labels.index');
     }
 
-    public function show()
-    {
-        abort(403);
-    }
-
     public function edit(Label $label)
     {
         return view('labels.edit', compact('label'));
@@ -68,17 +63,8 @@ class LabelController extends Controller
             return redirect()->route('labels.index');
         }
 
-        try {
-            $label->delete();
-            flash(__('label.flash.deleted'))->success();
-        } catch (QueryException $e) {
-            if ($e->getCode() === 23000) {
-                flash(__('label.flash.delete_exception', ['error' => $e->getMessage()]))->error();
-            } else {
-                throw $e;
-            }
-        }
-
+        $label->delete();
+        flash(__('label.flash.deleted'))->success();
         return redirect()->route('labels.index');
     }
 }

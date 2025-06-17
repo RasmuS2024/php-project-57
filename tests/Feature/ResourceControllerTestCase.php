@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Providers\AppServiceProvider;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\UsesClass;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 
 /**
  * @template TModel of \Illuminate\Database\Eloquent\Model
@@ -35,6 +36,8 @@ abstract class ResourceControllerTestCase extends TestCase
         parent::setUp();
         $this->model = app($this->modelClass())->factory()->create();
         $this->routePrefix = $this->routePrefix();
+
+        $this->withoutMiddleware(ValidateCsrfToken::class);
     }
 
     public function testIndex(): void

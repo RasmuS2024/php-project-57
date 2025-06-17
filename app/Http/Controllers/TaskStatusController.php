@@ -15,11 +15,6 @@ class TaskStatusController extends Controller
         return view('taskStatus.index', compact('taskStatuses'));
     }
 
-    public function show()
-    {
-        abort(403);
-    }
-
     public function create()
     {
         return view('taskStatus.create');
@@ -66,13 +61,9 @@ class TaskStatusController extends Controller
             $taskStatus->delete();
             flash(__('status.flash.deleted'))->success();
             return redirect()->route('task_statuses.index');
-        } catch (QueryException $e) {
-            if ($e->getCode() === 23000) {
-                flash(__('status.flash.delete_error'))->error();
-            } else {
-                flash(__('status.flash.delete_exception'))->error();
-            }
-            return redirect()->back();
+        } catch (\Exception $e) {
+            flash(__('status.flash.delete_error'))->error();
         }
+        return redirect()->back();
     }
 }

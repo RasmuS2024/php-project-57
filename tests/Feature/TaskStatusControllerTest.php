@@ -15,6 +15,15 @@ use PHPUnit\Framework\Attributes\UsesClass;
 #[UsesClass(User::class)]
 class TaskStatusControllerTest extends ResourceControllerTestCase
 {
+    protected User $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create();
+        $this->actingAs($this->user);
+    }
+
     protected function modelClass(): string
     {
         return TaskStatus::class;

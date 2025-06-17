@@ -19,7 +19,7 @@ jobs:
         with:
           php-version: '8.2'
           tools: composer
-          extensions: mbstring, xml, intl, pdo, pdo_mysql, sqlite
+          extensions: mbstring, xml, intl, pdo, sqlite
           coverage: xdebug
           
       - name: Install Composer dependencies

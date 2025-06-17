@@ -13,12 +13,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('profile', ProfileController::class)->only([
-        'edit', 'update', 'destroy'
-    ]);
-});
-
-Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class)->only([
         'create', 'edit', 'store', 'update', 'destroy'
     ]);
@@ -28,16 +22,16 @@ Route::resource('tasks', TaskController::class)->only(['index', 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('task_statuses', TaskStatusController::class)->only([
-        'create', 'edit', 'store', 'update', 'destroy'
+        'create', 'edit', 'store', 'update', 'destroy', 'show'
     ]);
 });
 
-Route::resource('task_statuses', TaskStatusController::class);
+Route::resource('task_statuses', TaskStatusController::class)->only(['index']);
 
 Route::middleware('auth')->group(function () {
-    Route::resource('labels', TaskStatusController::class)->only([
+    Route::resource('labels', LabelController::class)->only([
         'create', 'edit', 'store', 'update', 'destroy'
     ]);
 });
 
-Route::resource('labels', LabelController::class);
+Route::resource('labels', LabelController::class)->only(['index']);

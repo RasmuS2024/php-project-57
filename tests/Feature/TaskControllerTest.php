@@ -12,6 +12,7 @@ use PHPUnit\Framework\Attributes\UsesClass;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 
 #[CoversClass(TaskController::class)]
 #[UsesClass(AppServiceProvider::class)]
@@ -32,6 +33,8 @@ class TaskControllerTest extends TestCase
         /** @var Task $task */
         $task = Task::factory()->create(['created_by_id' => $this->user->id]);
         $this->task = $task;
+
+        $this->withoutMiddleware(ValidateCsrfToken::class);
     }
 
     public function testIndex(): void
