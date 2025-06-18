@@ -8,6 +8,8 @@ RUN docker-php-ext-install pdo pdo_pgsql zip
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php composer require symfony/error-handler \
+    && php composer why-not symfony/error-handler \
     && php -r "unlink('composer-setup.php');"
 
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
