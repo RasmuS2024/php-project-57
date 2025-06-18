@@ -1,67 +1,41 @@
-FROM php:8.2.28-fpm 
-# Changed to FPM for production-ready setup
+FROM php:8.2.28-cli
 
-# Install system dependencies
+# Установка зависимостей
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     libzip-dev \
-    nodejs \
-    npm
+    # Добавляем очистку кеша для уменьшения размера образа
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install pdo pdo_pgsql zip
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql zip
+# Безопасная установка Composer (официальным методом)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && php -r "unlink('composer-setup.php');"
+# Установка Node.js через официальный репозиторий (без pipe bash)
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js (using NodeSource's script for Node.js 22.x)
-# Note: nodejs and npm were already installed via apt-get, this ensures specific version if preferred
-RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
-RUN apt-get install -y nodejs
+WORKDIR /app
 
-WORKDIR /var/www/html # Standard web server root
-
-# Copy Composer files for caching
+# Копируем только необходимые для установки зависимостей файлы
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader # Install production dependencies
+RUN composer install --no-dev --no-scripts --no-autoloader --optimize-autoloader
 
-# Copy NPM files for caching
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Copy the rest of the application files
+# Копируем остальные файлы
 COPY . .
 
-# Build frontend assets
-RUN npm run build
+# Завершаем установку
+RUN composer dump-autoload --optimize \
+    && npm run build
 
-# Configure Nginx
-COPY docker/nginx.conf /etc/nginx/sites-available/default # Custom Nginx config
-RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default \
-    && rm -rf /etc/nginx/sites-enabled/default.bak # Ensure default config is linked
+# Разрешаем запись в storage (для Laravel)
+RUN chmod -R 775 storage bootstrap/cache
 
-# Set appropriate permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && find /var/www/html -type f -exec chmod 664 {} \; \
-    && find /var/www/html -type d -exec chmod 775 {} \; \
-    && chmod -R 777 /var/www/html/storage # Or restrict permissions more tightly
-
-EXPOSE 80 
-# Expose standard HTTP port
-
-# Start PHP-FPM and Nginx
-# Migrations should ideally be run as a separate step during deployment.
-# For simplicity in CMD if you must:
-CMD ["bash", "-c", "php-fpm && nginx -g 'daemon off;'"]
-# OR, with a custom entrypoint script:
-# COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-# RUN chmod +x /usr/local/bin/entrypoint.sh
-# ENTRYPOINT ["entrypoint.sh"]
-# CMD ["php-fpm", "nginx"] # entrypoint.sh would handle starting both
-
-# Example docker/entrypoint.sh
-#!/bin/bash
-# php artisan migrate --force # Run migrations before starting services
-# exec "$@" # Execute CMD
+# Используем отдельный скрипт для запуска
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
