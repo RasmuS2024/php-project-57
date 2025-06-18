@@ -36,6 +36,6 @@ RUN composer dump-autoload --optimize \
 RUN chmod -R 775 storage bootstrap/cache
 
 # Используем отдельный скрипт для запуска
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY /app/scripts/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
