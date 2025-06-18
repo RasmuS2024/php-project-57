@@ -6,7 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Support\Facades\Route;
+use App\Models\Task;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,13 @@ class AppServiceProvider extends ServiceProvider
                 'token' => $token,
                 'email' => $user->email
             ]));
+        });
+
+        Route::bind('task', function ($value) {
+            if (!ctype_digit($value)) {
+                abort(404);
+            }
+            return Task::findOrFail($value);
         });
     }
 }

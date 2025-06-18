@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.2.28-cli
 
 RUN apt-get update && apt-get install -y \
     libpq-dev \
@@ -10,7 +10,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
     && php -r "unlink('composer-setup.php');"
 
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_22.14.0 | bash -
 RUN apt-get install -y nodejs
 
 WORKDIR /app

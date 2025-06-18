@@ -52,6 +52,10 @@ Task Manager – система управления задачами, подо�
    ```bash
    npm run build
    php artisan migrate
+   ```
+
+5. Add test data to the database (tasks, task statuses and labels):
+   ```bash
    php artisan db:seed
    ```
 
