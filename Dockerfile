@@ -6,11 +6,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libzip-dev \
     nodejs \
-    npm \ # npm might be included with nodejs via nodesource, but sometimes explicit
-    nginx \ # Install Nginx
-    curl \
-    git \ # Often useful for composer or other needs
-    && rm -rf /var/lib/apt/lists/* # Clean up apt cache to reduce image size
+    npm
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_pgsql zip
