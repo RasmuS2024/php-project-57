@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
 use App\Models\TaskStatus;
 use Illuminate\Validation\Rule;
 
@@ -12,6 +11,7 @@ class TaskStatusController extends Controller
     public function index()
     {
         $taskStatuses = TaskStatus::orderBy('id')->paginate(15);
+
         return view('taskStatus.index', compact('taskStatuses'));
     }
 
@@ -32,6 +32,7 @@ class TaskStatusController extends Controller
 
         TaskStatus::create($request->all());
         flash(__('status.flash.created'))->success();
+
         return redirect()->route('task_statuses.index');
     }
 
@@ -52,6 +53,7 @@ class TaskStatusController extends Controller
 
         $taskStatus->update($request->all());
         flash(__('status.flash.updated'))->success();
+
         return redirect()->route('task_statuses.index');
     }
 
@@ -64,6 +66,7 @@ class TaskStatusController extends Controller
         } catch (\Exception $e) {
             flash(__('status.flash.delete_error'))->error();
         }
+
         return redirect()->back();
     }
 }

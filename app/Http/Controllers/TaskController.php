@@ -61,12 +61,14 @@ class TaskController extends Controller
         }
 
         flash(__('task.flash.created'))->success();
+
         return redirect()->route('tasks.index');
     }
 
     public function show(Task $task)
     {
         $task->load('status', 'creator', 'assignee', 'labels');
+
         return view('tasks.show', compact('task'));
     }
 
@@ -95,6 +97,7 @@ class TaskController extends Controller
         $task->labels()->sync($request->labels ?? []);
 
         flash(__('task.flash.updated'))->success();
+
         return redirect()->route('tasks.index');
     }
 
@@ -102,6 +105,7 @@ class TaskController extends Controller
     {
         $task->delete();
         flash(__('task.flash.deleted'))->success();
+
         return redirect()->route('tasks.index');
     }
 }

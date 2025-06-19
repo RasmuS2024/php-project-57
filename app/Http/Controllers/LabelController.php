@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Database\QueryException;
 
 class LabelController extends Controller
 {
@@ -53,6 +52,7 @@ class LabelController extends Controller
 
         $label->update($request->all());
         flash(__('label.flash.updated'))->success();
+
         return redirect()->route('labels.index');
     }
 
@@ -65,6 +65,7 @@ class LabelController extends Controller
 
         $label->delete();
         flash(__('label.flash.deleted'))->success();
+
         return redirect()->route('labels.index');
     }
 }

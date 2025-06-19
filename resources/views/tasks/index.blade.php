@@ -73,7 +73,10 @@
                             @if($task->created_by_id === auth()->id())
                                 {{ html()->a('#', __('task.index.buttons.delete'))
                                     ->class('text-red-600 hover:text-red-900')
-                                    ->attribute('onclick', 'event.preventDefault(); if(confirm(\''.__('task.index.delete_confirmation').'\')) { document.getElementById(\'delete-form-'.$task->id.'\').submit() }')
+                                    ->attribute('onclick', 'event.preventDefault();
+                                        if(confirm(\''.__('task.index.delete_confirmation').'\')) {
+                                            document.getElementById(\'delete-form-'.$task->id.'\').submit()
+                                        }')
                                     ->attribute('dusk', 'delete-link-'.$task->id)
                                 }}
                                 {{ html()->form('DELETE', route('tasks.destroy', $task))

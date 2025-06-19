@@ -32,7 +32,10 @@
                         <div class="flex items-center space-x-4">
                             {{ html()->a('#', __('common.delete'))
                                 ->class('text-red-600 hover:text-red-900')
-                                ->attribute('onclick', 'event.preventDefault(); if(confirm(\''.__('common.delete_confirm').'\')) { document.getElementById(\'delete-form-'.$status->id.'\').submit() }')
+                                ->attribute('onclick', 'event.preventDefault();
+                                    if(confirm(\''.__('common.delete_confirm').'\')) {
+                                        document.getElementById(\'delete-form-'.$status->id.'\').submit() 
+                                    }')
                                 ->attribute('dusk', 'delete-link-'.$status->id)
                             }}
                             {{ html()->form('DELETE', route('task_statuses.destroy', $status))
