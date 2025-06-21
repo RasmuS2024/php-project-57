@@ -12,15 +12,16 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $tasks = QueryBuilder::for(Task::class)
-            ->with(['status', 'creator', 'assignee'])
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
                 AllowedFilter::exact('created_by_id'),
                 AllowedFilter::exact('assigned_to_id'),
             ])
             ->defaultSort('id')
+            ->with(['status', 'creator', 'assignee'])
             ->paginate(15);
 
         return view('tasks.index', [
