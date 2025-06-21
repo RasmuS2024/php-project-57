@@ -7,14 +7,20 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
-    public function index()
-    {
-        $tasks = Task::with(['status', 'creator', 'assignee'])
-            ->filter(request()->only('filter'))
-            ->orderBy('id')
+    public function index() {
+        $tasks = QueryBuilder::for(Task::class)
+            ->with(['status', 'creator', 'assignee'])
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->defaultSort('id')
             ->paginate(15);
 
         return view('tasks.index', [

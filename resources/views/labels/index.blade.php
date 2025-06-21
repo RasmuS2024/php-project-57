@@ -25,8 +25,8 @@
         @foreach($labels as $label)
             <tr class="border-b border-dashed text-left">
                 <td>{{ $label->id }}</td>
-                <td>{{ $label->name }}</td>
-                <td>{{ $label->description }}</td>
+                <td class="break-all">{{ $label->name }}</td>
+                <td class="break-all">{{ $label->description }}</td>
                 <td>{{ $label->created_at->format('d.m.Y') }}</td>
                 @auth
                     <td>

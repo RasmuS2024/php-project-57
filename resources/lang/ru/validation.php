@@ -32,4 +32,8 @@ return [
     'values' => [
         'entity' => 'Сущность',
     ],
+
+    'max' => [
+        'string' => ':attribute не может быть длиннее :max символов',
+    ],
 ];

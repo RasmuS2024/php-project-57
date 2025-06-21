@@ -25,7 +25,7 @@
         @foreach($taskStatuses as $status)
             <tr class="border-b border-dashed text-left">
                 <td>{{ $status->id }}</td>
-                <td>{{ $status->name }}</td>
+                <td class="break-all">{{ $status->name }}</td>
                 <td>{{ $status->created_at->format('d.m.Y') }}</td>
                 @auth
                     <td class="p-2">
@@ -34,7 +34,7 @@
                                 ->class('text-red-600 hover:text-red-900')
                                 ->attribute('onclick', 'event.preventDefault();
                                     if(confirm(\''.__('common.delete_confirm').'\')) {
-                                        document.getElementById(\'delete-form-'.$status->id.'\').submit() 
+                                        document.getElementById(\'delete-form-'.$status->id.'\').submit()
                                     }')
                                 ->attribute('dusk', 'delete-link-'.$status->id)
                             }}

@@ -9,7 +9,7 @@
 <div class="space-y-3">
     <p><span class="font-black">@lang('task.show.fields.name'):</span> {{ $task->name }}</p>
     <p><span class="font-black">@lang('task.show.fields.status'):</span> {{ $task->status->name }}</p>
-    <p><span class="font-black">@lang('task.show.fields.description'):</span> {{ $task->description ?? __('task.show.empty_description') }}</p>
+    <p><span class="break-all font-black">@lang('task.show.fields.description'):</span> {{ $task->description ?? __('task.show.empty_description') }}</p>
     
     @if($task->labels->isNotEmpty())
         <p><span class="font-black">@lang('task.show.fields.labels'):</span></p>
