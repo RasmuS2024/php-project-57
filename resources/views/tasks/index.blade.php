@@ -73,8 +73,8 @@
                         ->class('text-blue-600 hover:text-blue-900')
                     }}
                 </td>
-                <td>{{ $task->creator->name }}</td>
-                <td>{{ $task->assignee->name ?? '-' }}</td>
+                <td class="break-all">{{ $task->creator->name }}</td>
+                <td class="break-all">{{ $task->assignee->name ?? '-' }}</td>
                 <td>{{ $task->created_at->format('d.m.Y') }}</td>
                 @auth
                     <td>
