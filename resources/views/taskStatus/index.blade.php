@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">{{ __('status.index_title') }}</h1>
+<h1 class="mb-5 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ __('status.index_title') }}</h1>
 
 @auth
     <div>
         {{ html()->a(route('task_statuses.create'), __('status.create'))
-            ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
+            ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded')
+        }}
     </div>
 @endauth
 
@@ -28,7 +29,7 @@
                 <td class="break-all">{{ $status->name }}</td>
                 <td>{{ $status->created_at->format('d.m.Y') }}</td>
                 @auth
-                    <td class="p-2">
+                    <td>
                         <div class="flex items-center space-x-4">
                             {{ html()->a('#', __('common.delete'))
                                 ->class('text-red-600 hover:text-red-900')

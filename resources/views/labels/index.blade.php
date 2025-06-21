@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">{{ __('label.index_title') }}</h1>
+<h1 class="mb-5 self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('label.index_title') }}</h1>
+
 @auth
     <div>
         {{ html()->a(route('labels.create'), __('label.create_title'))
@@ -9,6 +10,7 @@
         }}
     </div>
 @endauth
+
 <table class="mt-4">
     <thead class="border-b-2 border-solid border-black text-left">
         <tr>

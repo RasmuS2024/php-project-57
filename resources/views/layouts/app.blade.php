@@ -7,24 +7,47 @@
 
         <title>{{ config('app.name', 'TaskManager') }}</title>
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
         <script
           src="https://code.jquery.com/jquery-3.6.0.min.js"
           integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous">
         </script>
+
         <script>
           $(document).ready(function() {
             $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
           });
         </script>
+
         <style>
+          body {
+            font-family: 'Nunito', sans-serif;
+          }
           .alert {
-              white-space: nowrap;
-              display: inline-block;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            white-space: nowrap;
+            display: block;
+          }
+          .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+          }
+          .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
           }
         </style>
+
     </head>
+
     <body>
       <div id="app">
 
@@ -34,15 +57,14 @@
 
         <section class="bg-white dark:bg-gray-900">
           <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
-            
-            <div class="container">
-              @include('flash::message')
-            </div>
 
             <div class="grid col-span-full">
+              <div class="container">
+                @include('flash::message')
+              </div>
               @yield('content')
             </div>
-          
+
           </div>
         </section>
 

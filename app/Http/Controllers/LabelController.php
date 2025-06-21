@@ -23,6 +23,7 @@ class LabelController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:labels|max:255',
+            'description' => 'nullable|max:255',
         ], [
             'name.unique' => trans('validation.custom.name.unique', [
                 'entity' => __('label.entity')
@@ -47,7 +48,10 @@ class LabelController extends Controller
                 'max:255',
                 Rule::unique('labels')->ignore($label->id)
             ],
-            'description' => 'nullable|string'
+            'description' => [
+                'nullable',
+                'max:255',
+            ],
         ]);
 
         $label->update($request->all());

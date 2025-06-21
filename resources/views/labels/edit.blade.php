@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">{{ __('label.edit_title') }}</h1>
+<h1 class="mb-5 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ __('label.edit_title') }}</h1>
 {{ html()->modelForm($label, 'PATCH', route('labels.update', $label))->class('flex flex-col')->open() }}
     <div class="flex flex-col">
         <div>

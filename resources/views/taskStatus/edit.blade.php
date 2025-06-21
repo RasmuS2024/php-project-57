@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">{{ __('status.edit') }}</h1>
+<h1 class="mb-5 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ __('status.edit') }}</h1>
 
 {{ html()->form('PUT', route('task_statuses.update', $taskStatus))->class('w-50')->open() }}
     @csrf

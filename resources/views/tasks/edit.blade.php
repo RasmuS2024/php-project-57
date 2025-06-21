@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">@lang('task.edit.title')</h1>
+<h1 class="mb-5 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">@lang('task.edit.title')</h1>
 {{ html()->modelForm($task, 'PATCH', route('tasks.update', $task))->class('w-50')->open() }}
     <div class="flex flex-col">
         <div>

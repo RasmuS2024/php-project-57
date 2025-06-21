@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">{{ __('label.create_title') }}</h1>
+<h1 class="mb-5 self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('label.create_title') }}</h1>
 {{ html()->form('POST', route('labels.store'))->class('flex flex-col')->open() }}
     <div class="flex flex-col">
         <div>

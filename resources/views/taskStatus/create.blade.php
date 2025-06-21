@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-5">{{ __('status.create') }}</h1>
+<h1 class="mb-5 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ __('status.create') }}</h1>
 
 {{ html()->form('POST', route('task_statuses.store'))->class('w-50')->open() }}
     @csrf
