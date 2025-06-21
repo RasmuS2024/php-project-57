@@ -4,7 +4,7 @@ return [
     'Method Not Allowed' => 'Ошибка 405: Метод не разрешен',
     'method_not_allowed.title' => '405 | Неподдерживаемый метод',
     'method_not_allowed.message' => 'Сервер не поддерживает HTTP-метод, который вы использовали для этого запроса.',
-    
+
     'Unauthorized' => 'Не авторизован',
     'Payment Required' => 'Требуется оплата',
     'Forbidden' => 'Доступ запрещен',
