@@ -67,7 +67,7 @@
         @foreach($tasks as $task)
             <tr class="border-b border-dashed text-left">
                 <td style="text-align: center">{{ $task->id }}</td>
-                <td style="text-align: center">{{ $task->status->name }}</td>
+                <td class="break-all" style="text-align: center">{{ $task->status->name }}</td>
                 <td class="break-all">
                     {{ html()->a(route('tasks.show', $task), $task->name)
                         ->class('text-blue-600 hover:text-blue-900')

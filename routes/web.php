@@ -22,7 +22,7 @@ Route::resource('tasks', TaskController::class)->only(['index', 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('task_statuses', TaskStatusController::class)->only([
-        'create', 'edit', 'store', 'update', 'destroy', 'show'
+        'create', 'edit', 'store', 'update', 'destroy'
     ]);
 });
 

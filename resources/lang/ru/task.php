@@ -44,7 +44,7 @@ return [
         'delete_confirmation' => 'Вы уверены?',
     ],
     'show' => [
-        'title' => 'Просмотр задачи: :name',
+        'title' => 'Просмотр задачи:<br> :name',
         'fields' => [
             'name' => 'Имя',
             'status' => 'Статус',

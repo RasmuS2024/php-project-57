@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="mb-5 text-2xl font-bold break-all">
+
+<h2 class="mb-5 text-3xl font-bold break-all">
     @lang('task.show.title', ['name' => $task->name])
+</h2>
+
+<h2 class="mb-5 text-xl font-bold">
     {{ html()->a(route('tasks.edit', $task), '&#9881;изменить')->class('text-blue-600 hover:text-blue-900 text-2xl') }}
 </h2>
 
