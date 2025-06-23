@@ -2,22 +2,26 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\TaskController;
 use App\Models\Label;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\TaskStatus;
+use App\Http\Controllers\TaskController;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 
-#[CoversClass(TaskController::class)]
-#[UsesClass(AppServiceProvider::class)]
 #[UsesClass(Label::class)]
 #[UsesClass(Task::class)]
 #[UsesClass(User::class)]
+#[CoversClass(TaskController::class)]
+#[UsesClass(AppServiceProvider::class)]
+#[UsesClass(StoreTaskRequest::class)]
+#[UsesClass(UpdateTaskRequest::class)]
 class TaskControllerTest extends TestCase
 {
     private User $user;

@@ -6,10 +6,12 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -41,28 +43,11 @@ class TaskController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status_id' => 'required|exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|exists:users,id',
-            'labels' => 'nullable|array',
-            'labels.*' => 'exists:labels,id'
-        ], [
-            'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => __('task.entity')
-            ])
-        ]);
-
-        $task = Task::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'status_id' => $validated['status_id'],
-            'assigned_to_id' => $validated['assigned_to_id'],
-            'created_by_id' => auth()->id()
-        ]);
+        $validated = $request->validated();
+        $validated['created_by_id'] = Auth::id();
+        $task = Task::create($validated);
 
         if (isset($validated['labels'])) {
             $task->labels()->sync($validated['labels']);
@@ -90,19 +75,11 @@ class TaskController extends Controller
         ]);
     }
 
-    public function update(Request $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status_id' => 'required|exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|exists:users,id',
-            'labels' => 'nullable|array',
-            'labels.*' => 'exists:labels,id'
-        ]);
-
+        $validated = $request->validated();
         $task->update($validated);
-        $task->labels()->sync($request->labels ?? []);
+        $task->labels()->sync($validated['labels'] ?? []);
 
         flash(__('task.flash.updated'))->success();
 

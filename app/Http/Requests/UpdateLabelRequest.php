@@ -33,4 +33,13 @@ class UpdateLabelRequest extends FormRequest
             'description' => 'nullable|max:255',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.unique' => trans('validation.custom.name.unique', [
+                'entity' => __('label.entity')
+            ])
+        ];
+    }
 }

@@ -10,8 +10,8 @@
                          type="email"
                          name="email"
                          :value="old('email', $email)"
-                         required 
-                         autofocus 
+                         required
+                         autofocus
                          autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
@@ -22,7 +22,7 @@
                          class="block mt-1 w-full"
                          type="password"
                          name="password"
-                         required 
+                         required
                          autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -33,14 +33,14 @@
                          class="block mt-1 w-full"
                          type="password"
                          name="password_confirmation"
-                         required 
+                         required
                          autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                @lang('auth.password.reset.submit')
+                @lang('auth.password.email.submit')
             </x-primary-button>
         </div>
     </form>

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'entity' => 'Задача',
+
     'create' => [
         'title' => 'Создать задачу',
         'fields' => [
@@ -14,10 +16,12 @@ return [
         'status_placeholder' => 'Выберите статус',
         'assignee_placeholder' => 'Выберите исполнителя',
     ],
+
     'edit' => [
         'title' => 'Изменение задачи',
         'submit' => 'Обновить',
     ],
+
     'index' => [
         'title' => 'Задачи',
         'columns' => [
@@ -43,6 +47,7 @@ return [
         ],
         'delete_confirmation' => 'Вы уверены?',
     ],
+
     'show' => [
         'title' => 'Просмотр задачи:<br> :name',
         'fields' => [
@@ -53,6 +58,7 @@ return [
         ],
         'empty_description' => '—',
     ],
+
     'flash' => [
         'created' => 'Задача успешно создана',
         'updated' => 'Задача успешно изменена',

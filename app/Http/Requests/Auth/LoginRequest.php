@@ -82,12 +82,4 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
     }
-
-    public function messages()
-    {
-        return [
-            'email.required' => 'Email обязателен для заполнения',
-            'password.required' => 'Пароль обязателен',
-        ];
-    }
 }

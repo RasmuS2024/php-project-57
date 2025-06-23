@@ -32,4 +32,13 @@ class UpdateTaskStatusRequest extends FormRequest
             ]
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.unique' => trans('validation.custom.name.unique', [
+                'entity' => __('status.entity')
+            ])
+        ];
+    }
 }

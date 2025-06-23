@@ -2,26 +2,18 @@
 
 return [
     'create' => 'Создать статус',
-
-    'fields' => [
-        'name' => 'Имя',
-    ],
-
     'create_button' => 'Создать',
     'edit' => 'Изменение статуса',
     'update_button' => 'Обновить',
-
     'index_title' => 'Статусы',
+    'actions' => 'Действия',
+    'entity' => 'Статус',
 
     'fields' => [
         'id' => 'ID',
         'name' => 'Имя',
         'created_at' => 'Дата создания',
     ],
-
-    'actions' => 'Действия',
-
-    'entity' => 'Статус',
 
     'flash' => [
         'created' => 'Статус успешно создан',
