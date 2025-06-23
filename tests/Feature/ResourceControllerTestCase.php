@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Label;
 use App\Models\Task;
 use App\Models\User;
@@ -20,8 +19,6 @@ use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 #[UsesClass(User::class)]
 abstract class ResourceControllerTestCase extends TestCase
 {
-    use RefreshDatabase;
-
     protected $model;
     protected $routePrefix;
     protected const INDEX_ROUTE = 'index';

@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\TaskStatus;
 use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\UsesClass;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
@@ -21,8 +20,6 @@ use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 #[UsesClass(User::class)]
 class TaskControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private User $user;
     private Task $task;
 

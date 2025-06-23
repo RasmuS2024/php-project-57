@@ -9,6 +9,7 @@ use App\Models\Label;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+use Illuminate\Support\Facades\Config;
 
 class TaskController extends Controller
 {
@@ -22,7 +23,7 @@ class TaskController extends Controller
             ])
             ->defaultSort('id')
             ->with(['status', 'creator', 'assignee'])
-            ->paginate(15);
+            ->paginate(Config::get('pagination.per_page'));
 
         return view('tasks.index', [
             'tasks' => $tasks,

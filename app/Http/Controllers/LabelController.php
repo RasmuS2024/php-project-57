@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Label;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\StoreLabelRequest;
+use App\Http\Requests\UpdateLabelRequest;
+use Illuminate\Support\Facades\Config;
 
 class LabelController extends Controller
 {
     public function index()
     {
-        $labels = Label::orderBy('id')->paginate(15);
+        $labels = Label::orderBy('id')->paginate(Config::get('pagination.per_page'));
+
         return view('labels.index', compact('labels'));
     }
 
@@ -19,19 +21,11 @@ class LabelController extends Controller
         return view('labels.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreLabelRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:labels|max:255',
-            'description' => 'nullable|max:255',
-        ], [
-            'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => __('label.entity')
-            ])
-        ]);
-
-        Label::create($request->all());
+        Label::create($request->validated());
         flash(__('label.flash.created'))->success();
+
         return redirect()->route('labels.index');
     }
 
@@ -40,21 +34,9 @@ class LabelController extends Controller
         return view('labels.edit', compact('label'));
     }
 
-    public function update(Request $request, Label $label)
+    public function update(UpdateLabelRequest $request, Label $label)
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'max:255',
-                Rule::unique('labels')->ignore($label->id)
-            ],
-            'description' => [
-                'nullable',
-                'max:255',
-            ],
-        ]);
-
-        $label->update($request->all());
+        $label->update($request->validated());
         flash(__('label.flash.updated'))->success();
 
         return redirect()->route('labels.index');

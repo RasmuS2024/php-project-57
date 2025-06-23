@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\TaskStatus;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\StoreTaskStatusRequest;
+use App\Http\Requests\UpdateTaskStatusRequest;
+use Illuminate\Support\Facades\Config;
 
 class TaskStatusController extends Controller
 {
     public function index()
     {
-        $taskStatuses = TaskStatus::orderBy('id')->paginate(15);
-
+        $taskStatuses = TaskStatus::orderBy('id')->paginate(Config::get('pagination.per_page'));
         return view('taskStatus.index', compact('taskStatuses'));
     }
 
@@ -20,17 +20,9 @@ class TaskStatusController extends Controller
         return view('taskStatus.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTaskStatusRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:task_statuses|max:255',
-        ], [
-            'name.unique' => trans('validation.custom.name.unique', [
-                'entity' => __('status.entity')
-            ])
-        ]);
-
-        TaskStatus::create($request->all());
+        TaskStatus::create($request->validated());
         flash(__('status.flash.created'))->success();
 
         return redirect()->route('task_statuses.index');
@@ -41,17 +33,9 @@ class TaskStatusController extends Controller
         return view('taskStatus.edit', compact('taskStatus'));
     }
 
-    public function update(Request $request, TaskStatus $taskStatus)
+    public function update(UpdateTaskStatusRequest $request, TaskStatus $taskStatus)
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'max:255',
-                Rule::unique('task_statuses')->ignore($taskStatus->id)
-            ]
-        ]);
-
-        $taskStatus->update($request->all());
+        $taskStatus->update($request->validated());
         flash(__('status.flash.updated'))->success();
 
         return redirect()->route('task_statuses.index');
@@ -62,11 +46,10 @@ class TaskStatusController extends Controller
         try {
             $taskStatus->delete();
             flash(__('status.flash.deleted'))->success();
-            return redirect()->route('task_statuses.index');
         } catch (\Exception $e) {
             flash(__('status.flash.delete_error'))->error();
         }
 
-        return redirect()->back();
+        return redirect()->route('task_statuses.index');
     }
 }
