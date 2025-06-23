@@ -29,6 +29,8 @@ return [
 
     'unique' => ':attribute с таким именем уже существует',
 
+    'not_only_spaces' => 'Поле :attribute не может состоять только из пробелов',
+
     'values' => [
         'entity' => 'Сущность',
     ],

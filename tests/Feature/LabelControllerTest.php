@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\LabelController;
+use App\Http\Requests\StoreLabelRequest;
+use App\Http\Requests\UpdateLabelRequest;
 use App\Models\Label;
 use App\Models\Task;
 use App\Models\User;
@@ -10,11 +12,13 @@ use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 
-#[CoversClass(LabelController::class)]
-#[UsesClass(AppServiceProvider::class)]
 #[UsesClass(Label::class)]
 #[UsesClass(Task::class)]
 #[UsesClass(User::class)]
+#[CoversClass(LabelController::class)]
+#[UsesClass(AppServiceProvider::class)]
+#[UsesClass(StoreLabelRequest ::class)]
+#[UsesClass(UpdateLabelRequest  ::class)]
 class LabelControllerTest extends ResourceControllerTestCase
 {
     protected User $user;

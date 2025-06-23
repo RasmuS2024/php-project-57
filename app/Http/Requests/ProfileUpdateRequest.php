@@ -23,7 +23,7 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 function ($value, $fail) {
                     if (trim($value) === '') {
-                        $fail('Имя не может состоять только из пробелов');
+                        $fail('validation.not_only_spaces');
                     }
                 }
             ],

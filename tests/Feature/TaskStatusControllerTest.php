@@ -6,13 +6,17 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Http\Controllers\TaskStatusController;
+use App\Http\Requests\StoreTaskStatusRequest;
+use App\Http\Requests\UpdateTaskStatusRequest;
 use App\Providers\AppServiceProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 
+#[UsesClass(User::class)]
 #[CoversClass(TaskStatusController::class)]
 #[UsesClass(AppServiceProvider::class)]
-#[UsesClass(User::class)]
+#[UsesClass(StoreTaskStatusRequest::class)]
+#[UsesClass(UpdateTaskStatusRequest::class)]
 class TaskStatusControllerTest extends ResourceControllerTestCase
 {
     protected User $user;
