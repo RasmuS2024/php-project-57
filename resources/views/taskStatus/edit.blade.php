@@ -3,16 +3,13 @@
 @section('content')
 <h1 class="mb-5 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ __('status.edit') }}</h1>
 
-{{ html()->form('PUT', route('task_statuses.update', $taskStatus))->class('w-50')->open() }}
-    @csrf
-    
+{{ html()->modelForm($taskStatus, 'PUT', route('task_statuses.update', $taskStatus))->class('w-50')->open() }}
     <div class="flex flex-col">
         <div>
             {{ html()->label(__('status.fields.name'), 'name') }}
         </div>
         <div class="mt-2">
             {{ html()->text('name')
-                ->value(old('name', $taskStatus->name))
                 ->class('rounded border-gray-300 w-1/3')
                 ->classIf($errors->has('name'), 'border-red-500')
                 ->id('name')
